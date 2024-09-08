@@ -7,10 +7,10 @@ import SideBar from "@/components/Header/SideBar"
 export default function Header() {
   return (
     <>
-      <header className="py-4">
+      <header className="py-4 px-20 md:px-4">
         {/* Desktop Navigation */}
         <div className="hidden sm:block">
-          <div className="container p-4">
+          <div className="container p-4 md:px-4">
             <div className="flex justify-between items-center">
               {/* Logo */}
               <div className="horizontal-underline">
@@ -38,7 +38,7 @@ export default function Header() {
                     <Link href={'/contact'}>Contact</Link>
                   </li>
                   {/* Theme Switcher */}
-                  <li className="text-2xl hover:scale-110">
+                  <li className="text-2xl">
                     <ThemeSwitch />
                   </li>
                 </ul>

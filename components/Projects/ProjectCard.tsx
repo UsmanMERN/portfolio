@@ -13,9 +13,9 @@ interface Props {
 
 }
 
-export default function ProjectCard({data} : {data:Project}) {
+export default function ProjectCard({ data }: { data: Project }) {
 
-    const {title,src,about,tech,id,url} = data
+    const { title, src, about, tech, id, url } = data
     return (
         <section className='bg-transparent  rounded-2xl border dark:border-slate-700 glass w-full  p-4  hover:-translate-y-2 transition-all duration-150' >
             <a href={url} target='_blank' >
@@ -26,7 +26,7 @@ export default function ProjectCard({data} : {data:Project}) {
                     <h1 className='text-2xl font-bold'>{title}</h1>
                     <p className='text-gray-400 truncate'>{about}</p>
                     <div className="flex gap-2 mt-2 flex-wrap">
-                        {tech.map((t, i) => (<span key={i} className={`p-1 sm:p-2 rounded-md text-white font-medium`} style={{ backgroundColor: color[i] }} >{t}</span>))}
+                        {tech.map((t, i) => (<span key={i} className={`p-1 sm:p-2 rounded-md text-white font-medium capitalize`} style={{ backgroundColor: color[i] }} >{t}</span>))}
                     </div>
 
                 </div>

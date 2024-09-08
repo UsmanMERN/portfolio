@@ -32,7 +32,7 @@ export default function ProjectItem({ index, title, about, url, role, tech, setM
         </h2>
         <p className='text-muted-foreground'>{about}</p>
         <div className="flex gap-2 flex-wrap">
-        {tech.map((t, i) => (<span key={i} className={`p-1 sm:p-2  rounded-md text-white font-medium`} style={{ backgroundColor: color[i] }} >{t}</span>))}
+          {tech.map((t, i) => (<span key={i} className={`p-1 sm:p-2  rounded-md text-white font-medium capitalize`} style={{ backgroundColor: color[i] }} >{t}</span>))}
         </div>
       </div>
       <p className="text-sm text-muted-foreground transition-all group-hover:translate-x-3/ group-hover:scale-11/ sm:text-lg">

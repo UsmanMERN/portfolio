@@ -9,17 +9,17 @@ const ThemeSwitch = () => {
 
   useEffect(() => {
     const isTheme = localStorage.getItem('theme') || null
-    
-    if(isTheme==='system') {
+
+    if (isTheme === 'system') {
       setTheme('dark')
     }
     else if (isTheme) {
       setTheme(isTheme)
-    }else{
+    } else {
       setTheme('dark')
-      localStorage.setItem('theme', theme||'dark')
+      localStorage.setItem('theme', theme || 'dark')
     }
-    
+
     setMounted(true)
 
   }, [])
@@ -39,10 +39,8 @@ const ThemeSwitch = () => {
   }
 
   return (
-
     <label className="theme-switch">
       <input type="checkbox" className="theme-switch__checkbox" ref={inputRef} defaultChecked={theme === 'light' ? true : false} onChange={handleTheme} />
-
       <div className="theme-switch__container">
         <div className="theme-switch__clouds"></div>
         <div className="theme-switch__stars-container">
@@ -61,8 +59,6 @@ const ThemeSwitch = () => {
         </div>
       </div>
     </label>
-
-
   )
 }
 

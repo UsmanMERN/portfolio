@@ -1,6 +1,7 @@
 import React from 'react';
 import RightArrow from '../RightArrow';
 
+
 const Footer: React.FC = () => {
     return (
         <footer className="dark:text-white text-dark py-4">
@@ -9,7 +10,7 @@ const Footer: React.FC = () => {
                     <span className="hidden lg:block">
                         <RightArrow />
                     </span>
-                    <p className="text-center lg:text-left">Made With 💓 By webTribe</p>
+                    <p className="text-center lg:text-left">Made With 💓 By Me</p>
                 </div>
             </div>
         </footer>
