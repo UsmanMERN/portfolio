@@ -6,7 +6,7 @@ module.exports = {
     './components/**/*.{ts,tsx}',
     './app/**/*.{ts,tsx}',
     './src/**/*.{ts,tsx}',
-	],
+  ],
   theme: {
     container: {
       center: true,
@@ -15,17 +15,17 @@ module.exports = {
         "2xl": "1400px",
       },
     },
-   
+
     extend: {
       screens: {
         'xsm': '420px',
-        '1920px':'1920px'
+        '1920px': '1920px'
       },
       colors: {
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",
         ring: "hsl(var(--ring))",
-        dark02:'rgb(0,0,0,0.5)',
+        dark02: 'rgb(0,0,0,0.5)',
         background: "hsl(var(--background))",
         foreground: "hsl(var(--foreground))",
         primary: {

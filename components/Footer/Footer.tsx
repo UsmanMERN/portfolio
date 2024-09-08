@@ -3,13 +3,13 @@ import RightArrow from '../RightArrow';
 
 const Footer: React.FC = () => {
     return (
-        <footer className="dark:text-white light:text-dark py-4">
-            <div className="container mx-auto">
+        <footer className="dark:text-white text-dark py-4">
+            <div className="container mx-auto px-4">
                 <div className="flex justify-center lg:justify-between items-center">
-                    <span className='hidden lg:block'>
-                    <RightArrow />
+                    <span className="hidden lg:block">
+                        <RightArrow />
                     </span>
-                    <p className=''>Made With 💓 By webTribe</p>
+                    <p className="text-center lg:text-left">Made With 💓 By webTribe</p>
                 </div>
             </div>
         </footer>

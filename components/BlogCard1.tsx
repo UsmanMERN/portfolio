@@ -1,26 +1,28 @@
+"use client";
 import React from 'react'
-
+import { BackgroundGradient } from "@/components/ui/background-gradient";
 interface RepoProps {
     id: number;
     name: string;
     description: string | null;
     html_url: string;
-  }
+}
 
-const BlogCard1 = ({repo}:{repo:RepoProps}) => {
+const BlogCard1 = ({ repo, key }: { repo: RepoProps, key: number }) => {
     return (
-        <div className='w-[280px] h-[280px] xsm:w-[340px] xsm:h-[340px] sm:w-[260px] sm:h-[260px] md:w-[330px] md:h-[330px] lg:w-[210px] lg:h-[210px] xl:w-[295px] xl:h-[295px] 2xl:w-[325px]
-        2xl:h-[325px]  '>
-            <div className="card  dark:shadow-[#000] ">
-                <a href={repo.html_url} target="_blank" rel="noopener noreferrer" className=''>
-                <div className="bg p-4 dark:bg-black/90 dark:outline-[#000] ">
-                    <h6 className='text-lg'>{repo.name}</h6>
-                    <p className='text-sm '>{repo.description}</p>
+        <div className="flex justify-center">
+            <BackgroundGradient className="flex h-full w-[300px] flex-col rounded-[22px] max-w-sm p-4 sm:p-10 bg-white dark:bg-zinc-900">
+                <div className="p-4 sm:p-6 flex flex-col items-center text-center flex-grow">
+                    <a href={repo.html_url} target="_blank" rel="noopener noreferrer" className='block'>
+                        <div className="bg-white dark:bg-zinc-900 p-6">
+                            <h6 className='text-lg font-bold text-gray-800 dark:text-white mb-2'>{repo.name}</h6>
+                            <p className='text-sm text-gray-600 dark:text-gray-400'>
+                                {repo.description ? (repo.description.length > 30 ? `${repo.description.substring(0, 30)}...` : repo.description) : "No description available for this repo"}
+                            </p>
+                        </div>
+                    </a>
                 </div>
-                </a>
-                <div className="blob"></div>
-            </div>
-
+            </BackgroundGradient>
         </div>
     )
 }

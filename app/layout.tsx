@@ -34,19 +34,19 @@ export default function RootLayout({
 
 
   return (
-    <html lang="en" >
-      <body className={`bg-white dark:bg-black dark:text-white max-w-[1920px] ms-auto me-auto`}>
+    <html lang="en">
+      <body className="bg-white dark:bg-black dark:text-white max-w-full mx-auto overflow-x-hidden">
         <ThemeConfig>
           <Background />
           <Header />
-          <main >
-            <div className="px-6 md:px-4 lg:px-36  mt-8 sm:mt-0">
+          <main className="flex-1 overflow-y-auto overflow-x-hidden">
+            <div className="px-6 md:px-4 lg:px-36 mt-8 sm:mt-0">
               {children}
               <Analytics />
             </div>
           </main>
-          <span className='hidden lg:block'>
-          <NavigationMenu />
+          <span className="hidden lg:block">
+            <NavigationMenu />
           </span>
           <Footer />
         </ThemeConfig>
