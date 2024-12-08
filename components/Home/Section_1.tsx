@@ -15,20 +15,7 @@ export default function Section_1({ contributions }: { contributions: number }) 
         </span>
 
         <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold leading-tight text-gray-900 dark:text-white">
-          <TypeAnimation
-            sequence={[
-              'Transforming Ideas',
-              1000,
-              'Building Solutions',
-              1000,
-              'Coding Innovations',
-              1000
-            ]}
-            wrapper="span"
-            speed={50}
-            repeat={Infinity}
-            className="block text-blue-600"
-          />
+          <TypeAnimation sequence={['Transforming Ideas', 1000, 'Building Solutions', 1000, 'Coding Innovations', 1000]} wrapper="span" speed={50} repeat={Infinity} className="block text-blue-600" />
           <span className="block mt-2">with Code & Creativity</span>
         </h1>
 
@@ -57,23 +44,12 @@ export default function Section_1({ contributions }: { contributions: number }) 
 
         {/* CV Button */}
         <div className="flex justify-center md:justify-start">
-          <a
-            href="https://drive.google.com/uc?export=download&id=1--tZhWLI3tDmfd_5EYc_dFFiyquQfaQQ/"
-            download="Muhammad_Usman.pdf"
-            className="
-          flex items-center gap-2
-          bg-blue-600 text-white
-          px-6 py-3 rounded-lg
-          text-base font-semibold
-          shadow-md hover:shadow-xl
-          hover:bg-blue-700
-          transition-all duration-300
-          transform hover:scale-105"
-          >
+          <a href="https://drive.google.com/uc?export=download&id=1--tZhWLI3tDmfd_5EYc_dFFiyquQfaQQ" download="Muhammad_Usman.pdf" className="flex items-center gap-2bg-blue-600 text-whitepx-6 py-3 rounded-lgtext-base font-semiboldshadow-md hover:shadow-xlhover:bg-blue-700transition-all duration-300transform hover:scale-105">
             <Download size={20} />
             View My CV
           </a>
         </div>
+
       </div>
 
       {/* Right Content (SVG / Lottie Animation) */}
