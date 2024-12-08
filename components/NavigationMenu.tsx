@@ -1,7 +1,6 @@
-"use client"
+"use client";
 
-import * as React from "react"
-
+import * as React from "react";
 import {
   CommandDialog,
   CommandEmpty,
@@ -11,145 +10,87 @@ import {
   CommandList,
   CommandSeparator,
   CommandShortcut,
-} from "@/components/ui/command"
-import Link from "next/link"
-import { useRouter } from "next/navigation"
+} from "@/components/ui/command";
+import Link from "next/link";
+import { useRouter } from "next/navigation";
 
 export default function NavigationMenu() {
-  const router = useRouter()
-
-  const [open, setOpen] = React.useState(false)
-
+  const router = useRouter();
+  const [open, setOpen] = React.useState(false);
 
   const navigate = (route: string) => {
     router.push(route);
   };
+
   React.useEffect(() => {
+    const handleShortcuts = (e: KeyboardEvent) => {
+      const key = e.key.toLowerCase();
+      const isCtrlOrMeta = e.ctrlKey || e.metaKey;
 
-    const KeyBoardShortcuts = (e: KeyboardEvent) => {
-
-      const key = e.key
-      if ((key === "j" || key === "J") && (e.metaKey || e.ctrlKey)) {
+      if (isCtrlOrMeta && key === "j") {
         e.preventDefault();
         setOpen((prevOpen) => !prevOpen);
       }
+
       if (open) {
-
-        if ((key === 'h') && (e.metaKey || e.ctrlKey)) {
-          e.preventDefault();
-          setOpen((prevOpen) => !prevOpen);
-          navigate("/");
-        } else if ((key === 'a') && (e.metaKey || e.ctrlKey)) {
-          e.preventDefault();
-          setOpen((prevOpen) => !prevOpen);
-          navigate("/about");
-        } else if ((key === 'g') && (e.metaKey || e.ctrlKey)) {
-          e.preventDefault();
-          setOpen((prevOpen) => !prevOpen);
-          navigate("/github");
-        } else if ((key === 't') && (e.metaKey || e.ctrlKey) && e.altKey) {
-          e.preventDefault();
-          setOpen((prevOpen) => !prevOpen);
-          navigate("/tech");
-        } else if ((key === 'p') && (e.metaKey || e.ctrlKey)) {
-          e.preventDefault();
-          setOpen((prevOpen) => !prevOpen);
-          navigate("/projects");
-        }
-      } else {
-        if ((key === 'h') && (e.metaKey || e.ctrlKey) && e.altKey) {
-          e.preventDefault();
-          navigate("/");
-        } else if ((key === 'a') && (e.metaKey || e.ctrlKey) && e.altKey) {
-          e.preventDefault();
-          navigate("/about");
-        } else if ((key === 'g') && (e.metaKey || e.ctrlKey) && e.altKey) {
-          e.preventDefault();
-          navigate("/github");
-        } else if ((key === 't') && (e.metaKey || e.ctrlKey) && e.altKey) {
-          e.preventDefault();
-          navigate("/tech");
-        } else if ((key === 'p') && (e.metaKey || e.ctrlKey) && e.altKey) {
-          e.preventDefault();
-          navigate("/projects");
-        } else if ((key === 'c') && (e.metaKey || e.ctrlKey) && e.altKey) {
-          e.preventDefault();
-          navigate("/contact");
-        }
+        if (isCtrlOrMeta && key === "h") navigate("/");
+        if (isCtrlOrMeta && key === "a") navigate("/about");
+        if (isCtrlOrMeta && key === "g") navigate("/github");
+        if (isCtrlOrMeta && key === "p") navigate("/projects");
+        if (isCtrlOrMeta && e.altKey && key === "t") navigate("/tech");
       }
-
-
-    }
-
-    document.addEventListener("keydown", KeyBoardShortcuts);
-
-
-    return () => {
-      document.removeEventListener("keydown", KeyBoardShortcuts);
     };
-    // react - hooks / exhaustive - deps
-  }, [open]);
-  return (
 
+    document.addEventListener("keydown", handleShortcuts);
+    return () => document.removeEventListener("keydown", handleShortcuts);
+  }, [open]);
+
+  return (
     <>
-      <kbd className="inline-flex h-5 select-none items-center gap-1 rounded-lg font-mono text-[10px] font-medium p-5 pop-out border-spacing-12 cursor-pointer fixed right-4 md:right-12 bottom-14 bg-black text-white dark:bg-white dark:text-black hover:scale-105 transition-all duration-300 " onClick={() => { setOpen(!open) }}>
+      <kbd
+        className="fixed bottom-16 right-4 inline-flex h-5 items-center gap-1 rounded-lg bg-primary p-5 text-white cursor-pointer md:right-12"
+        onClick={() => setOpen(!open)}
+      >
         <span className="text-lg">⌘+J</span>
       </kbd>
-      {/* </Button> */}
-      <CommandDialog open={open} onOpenChange={setOpen} data-theme={'dark'}>
+      <CommandDialog open={open} onOpenChange={setOpen}>
         <CommandInput placeholder="Type a command or search..." />
-        <CommandList >
+        <CommandList>
           <CommandEmpty>No results found.</CommandEmpty>
-          <CommandGroup heading="pages">
-            <Link onClick={() => { setOpen(!open) }} href={'/'} >
-              <CommandItem >
+          <CommandGroup heading="Pages">
+            <Link href="/" onClick={() => setOpen(false)}>
+              <CommandItem>
                 Home
-                <CommandShortcut className=" bg-gray-400 text-white shadow-lg px-1 rounded">⌘H</CommandShortcut>
+                <CommandShortcut>⌘H</CommandShortcut>
               </CommandItem>
             </Link>
-            <Link onClick={() => { setOpen(!open) }} href={'/about'}>
+            <Link href="/about" onClick={() => setOpen(false)}>
               <CommandItem>
                 About
-                <CommandShortcut className=" bg-gray-400 text-white shadow-lg px-1 rounded">⌘A</CommandShortcut>
+                <CommandShortcut>⌘A</CommandShortcut>
               </CommandItem>
             </Link>
-            <Link onClick={() => { setOpen(!open) }} href={'/github'}>
+            <Link href="/github" onClick={() => setOpen(false)}>
               <CommandItem>
                 Github
-                <CommandShortcut className=" bg-gray-400 text-white shadow-lg px-1 rounded">⌘G</CommandShortcut>
+                <CommandShortcut>⌘G</CommandShortcut>
               </CommandItem>
             </Link>
-            <Link onClick={() => { setOpen(!open) }} href={'/projects'}>
+            <Link href="/projects" onClick={() => setOpen(false)}>
               <CommandItem>
                 Projects
-                <CommandShortcut className=" bg-gray-400 text-white shadow-lg px-1 rounded">⌘P</CommandShortcut>
+                <CommandShortcut>⌘P</CommandShortcut>
               </CommandItem>
             </Link>
-            <Link onClick={() => { setOpen(!open) }} href={'/tech'}>
+            <Link href="/tech" onClick={() => setOpen(false)}>
               <CommandItem>
                 Tech
-                <CommandShortcut className=" bg-gray-400 text-white shadow-lg px-1 rounded">⌘ alt T</CommandShortcut>
+                <CommandShortcut>⌘Alt+T</CommandShortcut>
               </CommandItem>
             </Link>
           </CommandGroup>
-          {/* <CommandSeparator />
-          <CommandGroup heading="Settings">
-            <CommandItem>
-              <span>Profile</span>
-              <CommandShortcut className=" bg-gray-400 text-white shadow-lg px-1 rounded">⌘P</CommandShortcut>
-            </CommandItem>
-            <CommandItem>
-              <span>Contact</span>
-              <CommandShortcut className=" bg-gray-400 text-white shadow-lg px-1 rounded">⌘C</CommandShortcut>
-            </CommandItem>
-            <CommandItem>
-              <span>Settings</span>
-              <CommandShortcut className=" bg-gray-400 text-white shadow-lg px-1 rounded">⌘S</CommandShortcut>
-            </CommandItem>
-          </CommandGroup> */}
         </CommandList>
       </CommandDialog>
     </>
-
-  )
+  );
 }

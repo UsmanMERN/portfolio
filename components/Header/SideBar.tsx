@@ -1,10 +1,13 @@
 "use client"
 
-import React, { useState, useEffect } from 'react'
+import React from 'react'
 import { usePathname } from 'next/navigation'
 import Link from 'next/link'
-import { motion } from 'framer-motion';
-import { AiOutlineHome, AiOutlineFundProjectionScreen } from 'react-icons/ai'
+import { motion } from 'framer-motion'
+import {
+    AiOutlineHome,
+    AiOutlineFundProjectionScreen
+} from 'react-icons/ai'
 import { TbBrandBlogger } from 'react-icons/tb'
 import { TiInfoLargeOutline } from 'react-icons/ti'
 import { GiTechnoHeart, GiHamburgerMenu } from 'react-icons/gi'
@@ -15,7 +18,6 @@ import {
     SheetClose,
     SheetContent,
     SheetDescription,
-    SheetFooter,
     SheetHeader,
     SheetTitle,
     SheetTrigger,
@@ -23,128 +25,121 @@ import {
 
 export default function Bottombar() {
     const pathname = usePathname()
-    const isActive = (link: string) => {
+
+    const NAV_ITEMS = [
+        { href: '/', icon: AiOutlineHome, label: 'Home' },
+        { href: '/about', icon: TbBrandBlogger, label: 'About' },
+        { href: '/projects', icon: AiOutlineFundProjectionScreen, label: 'Projects' },
+        { href: '/tech', icon: TiInfoLargeOutline, label: 'Tech' },
+        { href: '/github', icon: GiTechnoHeart, label: 'Github' },
+        { href: '/contact', icon: MdOutlineContactPhone, label: 'Contact' }
+    ]
+
+    const isActive = (link: any) => {
         return (pathname.includes(link) && link.length > 1) || pathname === link
     }
 
     const buttonVariants = {
         hover: {
-            scale: 1.1,
-            transition: { duration: 0.01 },
+            scale: 1.05,
+            transition: { duration: 0.1 },
         },
         tap: {
-            scale: 0.9,
-        },
-
-    };
+            scale: 0.95,
+        }
+    }
 
     return (
-        <>
-            <div className="w-screen my-6 z-50">
-                <div className="fixed top-6 left-5">
-                    <Link href={'/'}> <h1 className='text-2xl font-bold'>U.</h1></Link>
-                </div>
-                <div className="fixed top-8 right-14 me-5 font-bold text-2xl">
-                    <ThemeSwitch />
-                </div>
-                <div className="grid grid-cols-2 gap-2">
-                    <Sheet key={'left'}>
-                        <SheetTrigger asChild className='bg-none'>
-                            <motion.button
-                                key="hamburger-menu"
-                                whileHover={{ scale: 1.1 }}
-                                whileTap={{ scale: 0.9 }}
-                                className="fixed top-8 right-4  text-black dark:text-white bg-none"
+        <nav className="fixed top-0 left-0 right-0 z-50 ">
+            <div className="container mx-auto px-4 py-3">
+                <div className="flex justify-between items-center">
+                    {/* Logo - Left Side */}
+                    <Link
+                        href={'/'}
+                        className="text-2xl font-bold text-foreground hover:text-primary transition-colors group"
+                    >
+                        <span className="group-hover:drop-shadow-[0_0_5px_rgba(0,0,0,0.2)] transition-all">
+                            U.
+                        </span>
+                    </Link>
+
+                    {/* Navigation Actions - Right Side */}
+                    <div className="flex items-center space-x-4">
+                        {/* Theme Switcher */}
+                        <motion.div
+                            whileHover={{ scale: 1.1 }}
+                            whileTap={{ scale: 0.9 }}
+                            className="text-foreground hover:text-primary transition-colors"
+                        >
+                            <ThemeSwitch />
+                        </motion.div>
+
+                        {/* Mobile Menu Trigger */}
+                        <Sheet>
+                            <SheetTrigger asChild>
+                                <motion.button
+                                    whileHover={{ scale: 1.1 }}
+                                    whileTap={{ scale: 0.9 }}
+                                    className="text-foreground hover:text-primary transition-colors"
+                                >
+                                    <GiHamburgerMenu className="text-2xl" />
+                                </motion.button>
+                            </SheetTrigger>
+
+                            {/* Sidebar Content */}
+                            <SheetContent
+                                side={'right'}
+                                className="w-[320px] bg-background/95 backdrop-blur-lg shadow-2xl"
                             >
-                                <GiHamburgerMenu className="text-3xl" />
-                            </motion.button>
-                        </SheetTrigger>
-                        <SheetContent side={'left'}>
-                            <SheetHeader>
-                                <SheetTitle>WebTribe</SheetTitle>
-                                <SheetDescription>
-                                    I am a developer who turns ideas into reality, one line of code at a time.
-                                </SheetDescription>
-                            </SheetHeader>
-                            <motion.div className="flex align-center flex-col gap-4 items-center py-4 ">
+                                <SheetHeader className="border-b border-border/30 pb-6 mb-6">
+                                    <SheetTitle className="text-2xl font-bold text-primary">
+                                        WebTribe
+                                    </SheetTitle>
+                                    <SheetDescription className="text-foreground/70">
+                                        Crafting digital experiences, one line at a time.
+                                    </SheetDescription>
+                                </SheetHeader>
+
                                 <motion.div
-                                    whileHover="hover"
-                                    whileTap="tap"
-                                    variants={buttonVariants}
-                                    className={`grid items-center gap-4 ${isActive('/') && 'active'}`}>
-                                    <SheetClose asChild>
-                                        <Link href={'/'} >
-                                            <button className="p-2 xsm:p-4 font-bold rounded-xl text-xs xsm:text-sm flex gap-4 items-center  ">
-                                                <AiOutlineHome size={'24px'} />Home
-                                            </button>
-                                        </Link>
-                                    </SheetClose>
+                                    initial={{ opacity: 0, x: 20 }}
+                                    animate={{ opacity: 1, x: 0 }}
+                                    transition={{
+                                        duration: 0.4,
+                                        type: "spring",
+                                        stiffness: 100
+                                    }}
+                                    className="space-y-2"
+                                >
+                                    {NAV_ITEMS.map((item) => (
+                                        <motion.div
+                                            key={item.href}
+                                            whileHover="hover"
+                                            whileTap="tap"
+                                            variants={buttonVariants}
+                                        >
+                                            <SheetClose asChild>
+                                                <Link
+                                                    href={item.href}
+                                                    className={`
+                                                        flex items-center gap-4 p-3 rounded-lg 
+                                                        transition-all duration-300
+                                                        ${isActive(item.href)
+                                                            ? 'bg-primary/10 text-primary font-semibold'
+                                                            : 'hover:bg-primary/5 text-foreground/80 hover:text-foreground'}
+                                                    `}
+                                                >
+                                                    <item.icon size="24px" className="shrink-0" />
+                                                    <span className="text-sm">{item.label}</span>
+                                                </Link>
+                                            </SheetClose>
+                                        </motion.div>
+                                    ))}
                                 </motion.div>
-                                <motion.div
-                                    whileHover="hover"
-                                    whileTap="tap"
-                                    variants={buttonVariants}
-                                    className={`grid items-center gap-4 ${isActive('/about') && 'active'}`}>
-                                    <SheetClose asChild>
-                                        <Link href={'/about'}>
-                                            <button className={`p-2 xsm:p-4 font-bold rounded-xl flex gap-4 items-center justify-items-center  text-xs xsm:text-sm `}><TbBrandBlogger size={'24px'} />About</button></Link>
-                                    </SheetClose>
-                                </motion.div>
-                                <motion.div whileHover="hover" whileTap="tap" variants={buttonVariants} className={`grid items-center gap-4 ${isActive('/projects') && 'active'}`}>
-                                    <SheetClose asChild>
-                                        <Link href={'/projects'}>
-                                            <button className={`p-2 xsm:p-4 font-bold rounded-xl flex gap-4 items-center justify-items-center text-xs xsm:text-sm `}><AiOutlineFundProjectionScreen size={'24px'} />Projects</button>
-                                        </Link>
-                                    </SheetClose>
-                                </motion.div>
-                                <motion.div
-                                    whileHover="hover"
-                                    whileTap="tap"
-                                    variants={buttonVariants}
-                                    className={`grid items-center gap-4 ${isActive('/tech') && 'active'}`}>
-                                    <SheetClose asChild>
-                                        <Link href={'/tech'}>
-                                            <button
-                                                className={`p-2 xsm:p-4 font-bold rounded-xl flex gap-4 items-center justify-center text-xs xsm:text-sm `}
-                                            >
-                                                <TiInfoLargeOutline size={'24px'} />Tech
-                                            </button>
-                                        </Link>
-                                    </SheetClose>
-                                </motion.div>
-                                <motion.div
-                                    whileHover="hover"
-                                    whileTap="tap"
-                                    variants={buttonVariants}
-                                    className={`grid items-center gap-4 ${isActive('/github') && 'active'}`}>
-                                    <SheetClose asChild>
-                                        <Link href={'/github'}>
-                                            <button
-                                                className={`p-2 xsm:p-4 font-bold rounded-xl flex gap-4 items-center justify-center  text-xs xsm:text-sm `}>
-                                                <GiTechnoHeart size={'24px'} />Github
-                                            </button>
-                                        </Link>
-                                    </SheetClose>
-                                </motion.div>
-                                <motion.div
-                                    whileHover="hover"
-                                    whileTap="tap"
-                                    variants={buttonVariants}
-                                    className={`grid items-center gap-4 ${isActive('/contact') && 'active'}`}>
-                                    <SheetClose asChild>
-                                        <Link href={'/contact'}>
-                                            <button
-                                                className={`p-2 xsm:p-4 font-bold rounded-xl flex gap-4 items-center justify-center  text-xs xsm:text-sm `}>
-                                                <MdOutlineContactPhone size={'24px'} />Contact
-                                            </button>
-                                        </Link>
-                                    </SheetClose>
-                                </motion.div>
-                            </motion.div>
-                        </SheetContent>
-                    </Sheet>
+                            </SheetContent>
+                        </Sheet>
+                    </div>
                 </div>
             </div>
-        </>
+        </nav>
     )
 }

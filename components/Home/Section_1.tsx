@@ -1,43 +1,87 @@
+"use client"
 import React from 'react';
+import { TypeAnimation } from 'react-type-animation';
 import Svg from '../Svg';
+import { Download } from 'lucide-react';
+
 export default function Section_1({ contributions }: { contributions: number }) {
   return (
-    <div
-      className="flex justify-center items-center flex-col md:flex-row hero-section-1 mt-20 sm:mt-9 lg:mt-0">
-      <div className="w-full md:w-1/2">
-        <span
-          className="bg-primary text-white p-1 rounded-md text-sm sm:text-base">
+    <div className="relative flex justify-center items-center flex-col md:flex-row hero-section px-6 lg:px-20 py-12"
+    >
+      {/* Left Content */}
+      <div className="w-full md:w-1/2 text-center md:text-left space-y-6">
+        <span className="bg-blue-600 text-white px-3 py-1 rounded-full text-sm sm:text-base shadow-lg tracking-widest uppercase">
           Software Engineer
         </span>
-        <br />
-        <h1 className="text-2xl sm:text-4xl mt-4 leading-relaxed">
-          Making The Impossible Possible. Using 1&apos;s and 0&apos;s.
+
+        <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold leading-tight text-gray-900 dark:text-white">
+          <TypeAnimation
+            sequence={[
+              'Transforming Ideas',
+              1000,
+              'Building Solutions',
+              1000,
+              'Coding Innovations',
+              1000
+            ]}
+            wrapper="span"
+            speed={50}
+            repeat={Infinity}
+            className="block text-blue-600"
+          />
+          <span className="block mt-2">with Code & Creativity</span>
         </h1>
-        <p className="mt-4">Problem solving is what makes me unique.</p>
-        <div className="flex gap-10 sm:gap-44">
-          <div className="flex items-center gap-1 mt-16">
-            <h3 className="text-2xl sm:text-4xl">3</h3>
-            <p className="text-xs">Years of <br /> Experience</p>
+
+        <p className="text-base md:text-lg text-gray-700 dark:text-gray-300 max-w-xl mx-auto md:mx-0">
+          Passionate MERN Stack Developer specializing in crafting dynamic, scalable web solutions.
+          Turning complex challenges into elegant, efficient digital experiences.
+        </p>
+
+        {/* Stats Section */}
+        <div className="flex justify-center md:justify-start space-x-12 sm:space-x-24 py-6">
+          <div className="text-center">
+            <div className="text-4xl md:text-5xl font-bold text-blue-600">3+</div>
+            <p className="text-sm text-gray-600 dark:text-gray-400">
+              Years of <br /> Experience
+            </p>
           </div>
-          <div className="flex items-center gap-1 mt-16">
-            <h3 className="text-2xl sm:text-4xl">{contributions}</h3>
-            <p className="text-xs">Projects / <br /> Contributions</p>
+          <div className="text-center">
+            <div className="text-4xl md:text-5xl font-bold text-blue-600">
+              {contributions}
+            </div>
+            <p className="text-sm text-gray-600 dark:text-gray-400">
+              Projects / <br /> Contributions
+            </p>
           </div>
         </div>
-        <button className='download-button my-8'>
-          <span className="download-button_lg">
-            <span className="download-button_sl"></span>
-            <span className="download-button_text">
-              <a href="https://drive.google.com/uc?export=download&id=1aSGPrWW9c760C_FlVS4BUfif_xjz5L-k" download="Muhammad_Usman.pdf">View My CV</a>
-            </span>
-          </span>
-        </button>
+
+        {/* CV Button */}
+        <div className="flex justify-center md:justify-start">
+          <a
+            href="https://drive.google.com/uc?export=download&id=1--tZhWLI3tDmfd_5EYc_dFFiyquQfaQQ/"
+            download="Muhammad_Usman.pdf"
+            className="
+          flex items-center gap-2
+          bg-blue-600 text-white
+          px-6 py-3 rounded-lg
+          text-base font-semibold
+          shadow-md hover:shadow-xl
+          hover:bg-blue-700
+          transition-all duration-300
+          transform hover:scale-105"
+          >
+            <Download size={20} />
+            View My CV
+          </a>
+        </div>
       </div>
-      <div className="w-full md:w-1/2 hidden md:block">
-        <div>
+
+      {/* Right Content (SVG / Lottie Animation) */}
+      <div className="w-full md:w-1/2 md:flex hidden justify-center items-center">
+        <div className="max-w-md lg:max-w-lg xl:max-w-xl">
           <Svg />
         </div>
       </div>
-    </div>
+    </div >
   );
 }

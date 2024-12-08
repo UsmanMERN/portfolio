@@ -2,10 +2,10 @@
 module.exports = {
   darkMode: ["class"],
   content: [
-    './pages/**/*.{ts,tsx}',
-    './components/**/*.{ts,tsx}',
-    './app/**/*.{ts,tsx}',
-    './src/**/*.{ts,tsx}',
+    "./pages/**/*.{ts,tsx}",
+    "./components/**/*.{ts,tsx}",
+    "./app/**/*.{ts,tsx}",
+    "./src/**/*.{ts,tsx}",
   ],
   theme: {
     container: {
@@ -18,23 +18,27 @@ module.exports = {
 
     extend: {
       screens: {
-        'xsm': '420px',
-        '1920px': '1920px'
+        xsm: "420px",
+        "1920px": "1920px",
       },
       colors: {
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",
         ring: "hsl(var(--ring))",
-        dark02: 'rgb(0,0,0,0.5)',
         background: "hsl(var(--background))",
         foreground: "hsl(var(--foreground))",
+        dark02: "rgb(0,0,0,0.5)",
         primary: {
-          DEFAULT: "hsl(var(--primary))",
-          foreground: "hsl(var(--primary-foreground))",
+          DEFAULT: "hsl(217, 91%, 60%)", // Vibrant blue
+          light: "hsl(217, 91%, 75%)",
+          dark: "hsl(217, 91%, 45%)",
+          foreground: "hsl(0, 0%, 100%)",
         },
         secondary: {
-          DEFAULT: "hsl(var(--secondary))",
-          foreground: "hsl(var(--secondary-foreground))",
+          DEFAULT: "hsl(240, 64%, 58%)", // Deep blue-purple
+          light: "hsl(240, 64%, 73%)",
+          dark: "hsl(240, 64%, 43%)",
+          foreground: "hsl(0, 0%, 100%)",
         },
         destructive: {
           DEFAULT: "hsl(var(--destructive))",
@@ -79,4 +83,4 @@ module.exports = {
     },
   },
   plugins: [require("tailwindcss-animate")],
-}
+};

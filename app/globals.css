@@ -160,3 +160,42 @@ backdrop-filter: blur(5.9px);
   background: rgba(0, 0, 0, 0.4); /* Darker thumb on hover */
 }
 
+/* // Add to globals.css */
+ @layer utilities {
+   .animate-blob {
+     animation: blob 7s infinite;
+   }
+   .animation-delay-2000 {
+     animation-delay: 2s;
+   }
+   @keyframes blob {
+     0% { transform: translate(0px, 0px) scale(1); }
+     33% { transform: translate(30px, -50px) scale(1.1); }
+     66% { transform: translate(-20px, 20px) scale(0.9); }
+     100% { transform: translate(0px, 0px) scale(1); }
+   }
+ }
+
+ /* Reset and global styles */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+#root {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+main {
+  flex: 1 0 auto; /* Main content takes remaining height */
+}
+
+body {
+  margin: 0;
+  font-family: 'Inter', sans-serif;
+  background-color: #fff;
+  color: #333;
+}

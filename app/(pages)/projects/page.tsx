@@ -1,46 +1,57 @@
-import MainLayout from '@/components/MainLayout'
-import ProjectCard from '@/components/Projects/ProjectCard'
-import Projects from '@/components/Projects/Projects'
-import ProjectsCard from '@/components/ProjectsCard'
-import { projects } from '@/components/Projects/constants'
 import React from 'react'
 import { Metadata } from 'next'
 
+import { FolderOpen } from 'lucide-react'
+
+import { projects } from '@/components/Projects/constants'
+
+import MainLayout from '@/components/MainLayout'
+import ProjectCard from '@/components/Projects/ProjectCard'
+import Projects from '@/components/Projects/Projects'
+import PagesMainLayout from '@/components/PageMainLayout'
+import PageTitle from '@/components/PageTitle'
+
+
 export const metadata: Metadata = {
   title: 'Portfolio Projects',
-  description: 'Here is a showcase of my selected software engineering projects, including web applications, mobile applications, and desktop applications. I have experience in developing and deploying a variety of projects using a variety of technologies, including Next.js, React, Node.js, Express.js, MongoDB, PostgreSQL, HTML, CSS, JavaScript, Python, and C#. I am passionate about building innovative and user-friendly applications, and I am excited to share my work with the world.',
-  keywords: 'Software Engineering Projects, Web Development Projects, Mobile Development Projects, Desktop Development Projects, React, Node.js, Express.js, MongoDB, PostgreSQL, HTML, CSS, JavaScript, Python, C#, Software Engineer, Web Developer, Mobile Developer, Desktop Developer, Portfolio',
+  description:
+    'Showcase of my selected software engineering projects, including web, mobile, and desktop applications. Explore projects built using Next.js, React, Node.js, Express.js, MongoDB, PostgreSQL, HTML, CSS, JavaScript, Python, and C#. Discover innovative and user-friendly applications designed for diverse needs.',
+  keywords:
+    'Software Engineering Projects, Web Development Projects, Mobile Development Projects, Desktop Development Projects, React, Node.js, Express.js, MongoDB, PostgreSQL, HTML, CSS, JavaScript, Python, C#, Portfolio Projects',
   alternates: {
-    canonical: "/projects"
-  }
+    canonical: "/projects",
+  },
 };
+
 const Page = () => {
   return (
     <>
-      <div className="overflow-y-scroll scrollBar" style={{ maxHeight: '70vh' }}>
-        <div className="space-y-2 pt-6 pb-8 md:space-y-5 ">
-          <h1 className="text-3xl font-extrabold leading-9 tracking-tight text-gray-900 dark:text-gray-100 sm:text-4xl sm:leading-10 md:text-5xl md:leading-14">
-            Projects
-          </h1>
-          <p className="text-lg leading-7 text-gray-500 dark:text-gray-400">
-            Here are some of my selected projects worth sharing.
-          </p>
-        </div>
-        <div className="">
-          <MainLayout >
-            <div className="hidden xl:block">
+      <PagesMainLayout>
+
+        <MainLayout>
+          {/* Title Section */}
+
+          <PageTitle title="Projects"
+            subtitle="A showcase of selected projects built with passion and precision, featuring web, mobile, and desktop applications."
+            icon={<FolderOpen />} />
+          {/* Divider */}
+          <div className="border-t border-gray-300 dark:border-gray-700 my-8"></div>
+
+          {/* Projects Section */}
+          <div className="px-4 md:px-8 lg:px-16 xl:px-20">
+            <div className="hidden lg:block">
               <Projects />
             </div>
-            <div className=" xl:hidden grid grid-cols-1 sm:grid-cols-2  gap-4 px-1">
-              {projects.map(((p, k) => (
-                <ProjectCard key={k} data={p} />
-              )))}
+            <div className="lg:hidden grid grid-cols-1 md:grid-cols-2 gap-6">
+              {projects.map((project, index) => (
+                <ProjectCard key={index} data={project} />
+              ))}
             </div>
-          </MainLayout>
-        </div>
-      </div>
+          </div>
+        </MainLayout>
+      </PagesMainLayout>
     </>
-  )
-}
+  );
+};
 
-export default Page
+export default Page;

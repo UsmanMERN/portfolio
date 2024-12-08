@@ -1,93 +1,114 @@
+/* Global Background Styles */
+body {
+  --bg-gradient-1: rgba(59, 130, 246, 0.1); /* Soft Blue */
+  --bg-gradient-2: rgba(99, 102, 241, 0.1); /* Soft Indigo */
+  --bg-gradient-3: rgba(168, 85, 247, 0.1); /* Soft Purple */
+}
+
+/* Dark Mode Background */
+[data-theme="dark"] body {
+  --bg-gradient-1: rgba(59, 130, 246, 0.2); /* Deeper Blue */
+  --bg-gradient-2: rgba(99, 102, 241, 0.2); /* Deeper Indigo */
+  --bg-gradient-3: rgba(168, 85, 247, 0.2); /* Deeper Purple */
+}
+
+/* Enhanced Background Pattern */
 .splitbg::before {
-    content: "";
-    height: 100svh;
-    width: 100vw;
-    color: rgba(113, 113, 113, 0.07);
-    position: fixed;
-    z-index: -1;
-    background: linear-gradient(currentcolor 1px, transparent 1px) 0% 0% / 94px 90px, linear-gradient(to right, currentcolor 1px, transparent 1px) transparent;
-    transition: all 0.5s linear 0s;
+  content: "";
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100svh;
+  z-index: -2;
+  background-color: rgba(255, 255, 255, 0.05);
+  background-image: 
+    linear-gradient(45deg, var(--bg-gradient-1) 0%, transparent 50%),
+    linear-gradient(135deg, var(--bg-gradient-2) 10%, transparent 80%),
+    linear-gradient(225deg, var(--bg-gradient-3) 20%, transparent 70%);
+  background-size: 200% 200%;
+  animation: gradientMove 15s ease infinite;
+  opacity: 0.8;
+}
+
+/* Animated Gradient Background */
+body::after {
+  content: "";
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+  background: 
+    radial-gradient(at 40% 40%, rgba(59, 130, 246, 0.1) 0px, transparent 50%),
+    radial-gradient(at 90% 10%, rgba(99, 102, 241, 0.1) 0px, transparent 50%),
+    radial-gradient(at 50% 95%, rgba(168, 85, 247, 0.1) 0px, transparent 50%);
+  filter: blur(100px) saturate(150%);
+  opacity: 0.3;
+  transform: translateZ(0px);
+}
+
+/* Subtle Dot Grid Overlay */
+.splitbg::after {
+  content: "";
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100svh;
+  z-index: -1;
+  background-image: 
+    linear-gradient(rgba(59, 130, 246, 0.05) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(99, 102, 241, 0.05) 1px, transparent 1px);
+  background-size: 30px 30px;
+  opacity: 0.6;
+}
+
+/* Gradient Text Effect */
+.bg-text {
+  position: absolute;
+  font-size: clamp(100px, 20vw, 200px);
+  font-weight: bold;
+  background: linear-gradient(
+    45deg, 
+    rgba(59, 130, 246, 0.2), 
+    rgba(99, 102, 241, 0.2), 
+    rgba(168, 85, 247, 0.2)
+  );
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent;
+  opacity: 0.1;
+  z-index: -10;
+}
+
+/* Gradient Animation */
+@keyframes gradientMove {
+  0% {
+    background-position: 0% 50%;
   }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+/* Responsive Adjustments */
+@media screen and (max-width: 500px) {
   .splitbg::after {
-    content: "";
-    height: 10svh;
-    width: 100vw;
-    color: rgba(113, 113, 113, 0.07);
-    position: fixed;
-    z-index: -1;
-    background: linear-gradient(currentcolor 1px, transparent 1px) 0% 0% / 94px 90px, linear-gradient(to right, currentcolor 1px, transparent 1px) transparent;
-    transition: all 0.5s linear 0s;
+    background-size: 20px 20px;
+    width: 190vw;
     transform: rotate(90deg);
-    scale: 1.7;
+    scale: 1.2;
   }
-  
-  @media screen and (max-width: 500px){
-    .splitbg::after {
-      content: "";
-      width: 190vw;
-      background: linear-gradient(currentcolor 1px, transparent 1px) 0% 0% / 94px 90px, linear-gradient(to right, currentcolor 1px, transparent 1px) transparent;
-      transition: all 0.5s linear 0s;
-      scale: 1.2;
-    }
-  }
+}
 
-
-  @media screen and (max-width: 330px){
-    .splitbg::after {
-      content: "";
-      width: 270vw;
-      background: linear-gradient(currentcolor 1px, transparent 1px) 0% 0% / 94px 90px, linear-gradient(to right, currentcolor 1px, transparent 1px) transparent;
-      transition: all 0.5s linear 0s;
-      scale: 1.2;
-    }
+@media screen and (max-width: 330px) {
+  .splitbg::after {
+    width: 270vw;
+    scale: 1.2;
   }
-  
-  
-  body::after {
-    background-image: radial-gradient(at 40% 40%, rgb(30, 144, 255) 0px, transparent 50%), radial-gradient(at 90% 10%, rgb(255, 105, 180) 0px, transparent 50%), radial-gradient(at 50% 95%, rgb(0, 255, 255) 0px, transparent 50%), radial-gradient(at 20% 30%, rgb(50, 205, 50) 0px, transparent 50%), radial-gradient(at 90% 90%, rgb(255, 255, 0) 0px, transparent 50%), radial-gradient(at 33% 50%, rgb(255, 69, 0) 0px, transparent 50%), radial-gradient(at 79% 53%, rgb(128, 0, 128) 0px, transparent 50%);
-    position: fixed;
-    content: "";
-    z-index: -1;
-    width: 100%;
-    height: 100%;
-    filter: blur(100px) saturate(100%);
-    top: 0px;
-    opacity: 0.1;
-    transform: translateZ(0px);
-  }
-  
-  
-  .bg-text{
-    /* font-size: 200px; */
-    color: rgba(128, 228, 128, 0.111);
-    /* color: ; */
-    bottom: -18px;  
-    left: -40px;  
-    z-index: -10;
-  }
-  
-  [data-theme="dark"] .bg-text{
-    /* color: rgba(255, 255, 255); */
-    color: red;
-
-  }
-  
-
-  .bg-skin-base{
-    animation: linear 1ms infinite;
-  }
-
-
-  @keyframes linearGradient {
-
-    0%{
-      color: red;
-    }
-    50%{
-      color: green;
-    }
-    100%{
-      color: blue;
-    }
-    
-  }
+}

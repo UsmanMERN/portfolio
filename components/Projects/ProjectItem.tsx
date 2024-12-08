@@ -23,7 +23,7 @@ export default function ProjectItem({ index, title, about, url, role, tech, setM
       onMouseLeave={() => {
         setModal({ active: false, index });
       }}
-      className="group  flex w-full items-center justify-between border-b border-b-black dark:border-b-gray-500  px-4 py-10 sm:px-10 sm:py-16"
+      className="group  flex w-full items-center justify-between border-b border-gray-300 dark:border-gray-600 px-4 py-10 sm:px-10 sm:py-16"
       rel="noreferrer"
     >
       <div className="flex flex-col space-y-8">

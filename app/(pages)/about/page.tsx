@@ -1,101 +1,169 @@
-import { Metadata } from 'next'
-import Image from 'next/image'
-import React from 'react'
-import { AiFillGithub, AiFillLinkedin, AiFillMail } from "react-icons/ai"
-// import { myImage } from "/image.png"
+import { Metadata } from "next";
+import Image from "next/image";
+import React from "react";
+import {
+  CodeIcon,
+  TargetIcon,
+  GlobeIcon,
+  AwardIcon,
+  RocketIcon, User
+} from "lucide-react";
+import {
+  AiFillGithub,
+  AiFillLinkedin,
+  AiFillMail
+} from "react-icons/ai";
+import PagesMainLayout from "@/components/PageMainLayout";
+import PageTitle from "@/components/PageTitle";
 
 export const metadata: Metadata = {
-  title: "About me ",
-  description: "I am passionate software engineer and MERN stack developer with a mission to transform ideas into reality. I am an obsessive attention to detail and an unwavering love for crafting digital solutions. I am excited to collaborate with visionary teams and organizations that share a passion for innovation and the drive to change the world through technology.I have extensive experience in all aspects of the MERN stack, including React, Node.js, Express.js, and MongoDB. I am also proficient in a variety of other front-end and back-end technologies, such as HTML, CSS, JavaScript, Python, and SQL.",
-  keywords: "Software Engineer, Web Developer, MERN Stack Developer, Full Stack Developer, Front-End Developer, Back-End Developer, Web Development Services, MERN Stack Development Services, Full Stack Development Services, Front-End Development Services, Back-End Development Services, Custom Web Development, Custom Software Development",
+  title: "Muhammad Usman | Software Engineer & MERN Stack Developer",
+  description:
+    "Discover Muhammad Usman, a passionate software engineer and MERN stack developer. Learn about his expertise in React, Node.js, MongoDB, and other cutting-edge technologies. Find out how he transforms ideas into digital reality.",
+  keywords:
+    "Muhammad Usman, MERN Stack Developer, Software Engineer, Web Developer, Full Stack Developer, React Developer, Node.js Expert, MongoDB Developer, Digital Solutions, Software Development",
   alternates: {
-    canonical: "/about"
-  }
+    canonical: "/about",
+  },
 };
 
 function About() {
-
   return (
-    <>
-      <div className='overflow-y-scroll md:overflow-y-hidden max-h-[70vh] md:max-h-none scrollBar pb-8'>
-        <div className="space-y-2 pt-6 pb-8 md:space-y-5 " >
-          <h1 className="text-3xl font-extrabold  leading-9 tracking-tight text-gray-900 dark:text-gray-100 sm:text-4xl sm:leading-10 md:text-5xl md:leading-14">
-            About me
-          </h1>
+    <PagesMainLayout>
+
+      <PageTitle title="About Me"
+        subtitle="Transforming ideas into digital magic with code. Passionate about MERN stack development and crafting solutions for the modern world."
+        icon={<User />} />
+      <div className="my-8 border-t border-gray-300 dark:border-gray-700"></div>
+
+      {/* Main Content */}
+      <div className="flex flex-wrap justify-center items-start mt-12 gap-12 lg:gap-20">
+        {/* Profile Card */}
+        <div className="glass flex flex-col items-center  shadow-lg rounded-xl p-8 w-full max-w-sm transform transition-transform hover:scale-105 hover:shadow-xl">
+          <div className="relative w-48 h-48 mb-6">
+            <Image
+              src="/image.png"
+              alt="Profile picture of Muhammad Usman"
+              className="rounded-full object-cover border-4 border-gray-100 dark:border-gray-800 shadow-lg"
+              layout="fill"
+            />
+            <div className="absolute bottom-0 right-0 bg-white dark:bg-gray-700 p-2 rounded-full shadow-md">
+              <CodeIcon className="w-6 h-6 text-blue-500" />
+            </div>
+          </div>
+          <h2 className="text-2xl font-bold text-gray-900 dark:text-white">
+            Muhammad Usman
+          </h2>
+          <p className="text-sm text-gray-600 dark:text-gray-400">
+            Software Engineer | MERN Stack Developer
+          </p>
+          <div className="mt-4 flex space-x-6">
+            {[
+              {
+                Icon: AiFillGithub,
+                href: "https://github.com/UsmanMERN",
+                color: "text-gray-700 hover:text-gray-900 dark:text-gray-300 dark:hover:text-white",
+              },
+              {
+                Icon: AiFillMail,
+                href: "mailto:usman853136@gmail.com",
+                color: "text-red-600 hover:text-red-800 dark:text-red-400 dark:hover:text-red-600",
+              },
+              {
+                Icon: AiFillLinkedin,
+                href: "https://www.linkedin.com/in/mernstack-developers/",
+                color: "text-blue-600 hover:text-blue-800 dark:text-blue-400 dark:hover:text-blue-600",
+              },
+            ].map(({ Icon, href, color }, index) => (
+              <a
+                key={index}
+                href={href}
+                target="_blank"
+                rel="noopener noreferrer"
+                className={`text-3xl transition-transform transform hover:scale-110 ${color}`}
+              >
+                <Icon />
+              </a>
+            ))}
+          </div>
         </div>
-        <div className="w-full flex flex-col md:flex-row justify-center md:justify-between mt-8 sm:mt-0 " >
-        <div className="w-full lg:w-1/2 flex justify-center self-start">
-            <div className="rounded-xl  overflow-hidden relative text-center p-10 group items-center flex flex-col max-w-sm hover:shadow-2xl transition-all duration-500 shadow-xl about-card glass dark:border-gray-600 ">
-              <span className='about-card-span-1'></span>
-              <span className='about-card-span-2'></span>
-              <div className="text-gray-500 group-hover:scale-105 transition-all">
-                <div className="relative w-48 m-1">
-                  <Image
-                    src={"/image.png"}
-                    alt="author"
-                    className="object-cover rounded-xl cursor-pointer uppercase px-4 py-2 active:translate-x-0.5 active:translate-y-0.5 hover:shadow-[0.5rem_0.5rem_hsl(var(--primary)),-0.5rem_-0.5rem_black] dark:hover:shadow-[0.5rem_0.5rem_hsl(var(--primary)),-0.5rem_-0.5rem_white] transition"
-                    height={275}
-                    width={265}
-                  />
+
+        {/* About Section */}
+        <div className="flex-1 max-w-2xl space-y-8">
+          <h2 className="text-3xl font-bold text-gray-900 dark:text-white">
+            Hi there! I&apos;m Muhammad Usman
+          </h2>
+          <div className="space-y-6">
+            {[
+              {
+                icon: CodeIcon,
+                text: "A passionate software engineer and dedicated MERN stack developer on a mission to transform ideas into reality.",
+              },
+              {
+                icon: TargetIcon,
+                text: "With obsessive attention to detail and an unwavering love for crafting digital solutions, I bring dreams to life through code.",
+              },
+              {
+                icon: GlobeIcon,
+                text: "I believe a great developer isn't just about writing code but understanding problems, architecting elegant solutions, and continuously learning.",
+              },
+              {
+                icon: AwardIcon,
+                text: "Awarded as 'Best Innovator of the Year' for my exceptional work in full-stack development and leading impactful projects.",
+              },
+              {
+                icon: RocketIcon,
+                text: "Building scalable, secure, and efficient applications is my forte. I'm always seeking new challenges to push the boundaries of technology.",
+              },
+            ].map(({ icon: Icon, text }, index) => (
+              <div
+                key={index}
+                className="flex items-center gap-4 bg-gray-100 dark:bg-gray-800 p-4 rounded-lg shadow-md transition-all duration-300 hover:shadow-lg"
+              >
+                <div className="p-3 bg-blue-100 dark:bg-blue-900 rounded-full">
+                  <Icon className="w-6 h-6 text-blue-500 dark:text-blue-300" />
                 </div>
+                <p className="text-gray-700 dark:text-gray-300">{text}</p>
               </div>
-              <div className="group-hover:pb-10 transition-all duration-500 delay-200 mt-12">
-                <h1 className="font-semibold text-gray-700 dark:text-white z-10">Muhammad Usman</h1>
-                <p className="text-gray-500 text-sm dark:text-white z-10">Software Engineer</p>
-              </div>
-              <div className="flex items-center transition-all duration-500 delay-200 group-hover:bottom-3 -bottom-full absolute gap-2 justify-evenly w-full">
-                <div className="flex gap-3 text-2xl bg-gray-700 text-white p-1 hover:p-2 transition-all duration-500 delay-200 rounded-full shadow-sm">
-                  <a href="https://github.com/UsmanMERN" target="_blank" rel="noopener noreferrer" className="hover:scale-110 cursor-pointer transition-all duration-500 delay-200">
-                    <AiFillGithub />
-                  </a>
-                  <a href="mailto:usman853136@gmail.com" target="_blank" rel="noopener noreferrer" className="hover:scale-110 cursor-pointer transition-all duration-500 delay-200">
-                    <AiFillMail />
-                  </a>
-                  <a href="https://www.linkedin.com/in/mernstack-developers/" target="_blank" rel="noopener noreferrer" className="hover:scale-110 cursor-pointer transition-all duration-500 delay-200">
-                    <AiFillLinkedin />
-                  </a>
-                </div>
-              </div>
-            </div>
+            ))}
           </div>
-          <div className="w-full lg:w-1/2 flex items-center justify-center ">
-            <div className={`w-full h-auto relative top-[20px] p-[10px] mb-[30px] md:mb-0 md:top-0 md:overflow-y-scroll scrollBar md:max-h-[55vh]`}>
-              <p className={`text-[12px] text-white-200 `}>Introduction</p>
-              <div className={`relative top-[20px]`}>
-                <h1 className={`text-[35px] font-bold mb-[10px]`}>
-                  Hi ✌️ I&apos;m Muhammad Usman
-                </h1>
-                <br />
-                <div className="p-4 text-[15px] text-white-200 px-5 bg-dark-400 border-solid">
-                  <p className="text-lg border-l-green-200 p-4 text-[15px] text-white-200 px-5 bg-dark-400 border-solid">
-                    A passionate software engineer and a dedicated MERN stack developer on a mission to transform ideas into reality. 🌟
-                  </p>
-                  <p className="text-lg border-l-green-200 p-4 text-[15px] text-white-200 px-5 bg-dark-400 border-solid">
-                    With an obsessive attention to detail and an unwavering love for crafting digital solutions, I bring dreams to life through code. My work ethic is more than a job  it&apos;s a mission to make a lasting impact.
-                  </p>
-                  <p className="text-lg border-l-green-200 p-4 text-[15px] text-white-200 px-5 bg-dark-400 border-solid">
-                    ⚙️ I believe that a great developer isn&apos;t just about writing code; it&apos;s about understanding the problem, architecting elegant solutions, and continuously learning to stay at the cutting edge of technology.
-                  </p>
-                  <p className="text-lg border-l-green-200 p-4 text-[15px] text-white-200 px-5 bg-dark-400 border-solid">
-                    🌍 I&apos;m excited about the opportunity to collaborate with visionary teams and organizations that share a passion for innovation and the drive to change the world through technology.
-                  </p>
-                  <p className="text-lg border-l-green-200 p-4 text-[15px] text-white-200 px-5 bg-dark-400 border-solid">
-                    Let&apos;s connect and build something extraordinary together. Feel free to reach out, and let&apos;s turn ideas into digital magic! ✨
-                  </p>
-                </div>
-              </div>
-            </div>
-          </div>
+
+          <blockquote className="text-lg italic text-gray-600 dark:text-gray-400 border-l-4 pl-4 border-blue-500">
+            &quot;Let&apos;s connect and build something extraordinary together. Turning ideas into digital magic is my passion! ✨&quot;
+          </blockquote>
+
+          <h2 className="text-2xl font-bold text-gray-900 dark:text-white mt-12">
+            Skills and Expertise
+          </h2>
+          <ul className="list-disc list-inside text-gray-700 dark:text-gray-300">
+            <li>Proficient in React.js, Node.js, Express, and MongoDB (MERN Stack).</li>
+            <li>Experience with modern JavaScript (ES6+) and TypeScript.</li>
+            <li>Skilled in building RESTful APIs and integrating third-party services.</li>
+            <li>Strong knowledge of UI/UX principles and responsive design.</li>
+            <li>Familiar with Git, Docker, and CI/CD pipelines for efficient development workflows.</li>
+            <li>Basic understanding of machine learning and computer vision concepts.</li>
+          </ul>
         </div>
       </div>
-    </>
-  )
+
+      <div className="my-8 border-t border-gray-300 dark:border-gray-700"></div>
+
+      {/* Call to Action */}
+      <div className="text-center">
+        <p className="text-lg text-gray-600 dark:text-gray-300">
+          Interested in collaborating or have a project idea? Let&apos;s make it happen!
+        </p>
+        <a
+          href="mailto:usman853136@gmail.com" target="_blank"
+          className="inline-block mt-4 px-6 py-3 bg-blue-600 text-white text-lg font-medium rounded-lg shadow-md hover:bg-blue-700 hover:shadow-lg transition-transform transform hover:scale-105"
+        >
+          Get in Touch
+        </a>
+      </div>
+    </PagesMainLayout>
+  );
 }
 
-export default About
+export default About;
 
 
-
-// https://api.github.com/users/UsmanMERN/repos
-
-// get repest to get all github data

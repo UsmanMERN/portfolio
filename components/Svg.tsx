@@ -1,15 +1,12 @@
-'use client'
+'use client';
 import React from 'react';
 import Lottie from 'lottie-react';
-import * as animationData from '../public/lotties/animation_lmnww75b.json'; // Import your Lottie JSON file
-
+import * as animationData from '../public/lotties/animation_lmnww75b.json'; // Ensure this path is correct
 
 export default function Svg() {
-
-
 	return (
-		<div className='lg:h-[500px] 1920px:h-[650px] ' >
-			<Lottie animationData={animationData} loop={true} autoPlay={true} />
+		<div className="w-full h-auto">
+			<Lottie animationData={animationData} loop={true} autoplay={true} />
 		</div>
 	);
 }
