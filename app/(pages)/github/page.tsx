@@ -56,7 +56,7 @@ const GithubProjects = async () => {
         {repos.map((repo, index) => (
           <div
             key={repo.id}
-            className="bg-white dark:bg-gray-800 rounded-xl shadow-lg overflow-hidden transform transition-all hover:scale-105 hover:shadow-2xl"
+            className="glass rounded-xl shadow-lg overflow-hidden transform transition-all hover:scale-105 hover:shadow-2xl"
           >
             <div className="p-6">
               <div className="flex justify-between items-center mb-4">

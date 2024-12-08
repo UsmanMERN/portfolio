@@ -1,40 +1,57 @@
-import React from 'react';
-import { Metadata } from 'next';
-import PagesMainLayout from '@/components/PageMainLayout';
-import PageTitle from '@/components/PageTitle';
-import Techstack from '@/components/Techstack';
-import { Cpu } from "lucide-react";
-import Technologies from '@/components/Technelogies';
+import React from 'react'
+import { Metadata } from 'next'
+
+import { FolderOpen } from 'lucide-react'
+
+import { projects } from '@/components/Projects/constants'
+
+import MainLayout from '@/components/MainLayout'
+import ProjectCard from '@/components/Projects/ProjectCard'
+import Projects from '@/components/Projects/Projects'
+import PagesMainLayout from '@/components/PageMainLayout'
+import PageTitle from '@/components/PageTitle'
+
 
 export const metadata: Metadata = {
-  title: 'Tech Stack and Tools',
-  description: 'Comprehensive overview of technologies and tools used in software development.',
+  title: 'Portfolio Projects',
+  description:
+    'Showcase of my selected software engineering projects, including web, mobile, and desktop applications. Explore projects built using Next.js, React, Node.js, Express.js, MongoDB, PostgreSQL, HTML, CSS, JavaScript, Python, and C#. Discover innovative and user-friendly applications designed for diverse needs.',
+  keywords:
+    'Software Engineering Projects, Web Development Projects, Mobile Development Projects, Desktop Development Projects, React, Node.js, Express.js, MongoDB, PostgreSQL, HTML, CSS, JavaScript, Python, C#, Portfolio Projects',
+  alternates: {
+    canonical: "/projects",
+  },
 };
 
-const Tech = () => {
+const Page = () => {
   return (
-    <PagesMainLayout>
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-        <PageTitle
-          title="Technologies & Tools"
-          subtitle="These are the tools and technologies I work with to create amazing applications."
-          icon={<Cpu />}
-        />
+    <>
+      <PagesMainLayout>
 
-        <div className="border-t border-gray-200 dark:border-gray-700 my-8"></div>
+        <MainLayout>
+          {/* Title Section */}
 
-        <section className="space-y-8">
-          <div className="bg-white dark:bg-gray-900 rounded-lg shadow-sm">
-            <Technologies />
+          <PageTitle title="Projects"
+            subtitle="A showcase of selected projects built with passion and precision, featuring web, mobile, and desktop applications."
+            icon={<FolderOpen />} />
+          {/* Divider */}
+          <div className="border-t border-gray-300 dark:border-gray-700 my-8"></div>
+
+          {/* Projects Section */}
+          <div className="px-4 md:px-8 lg:px-16 xl:px-20">
+            <div className="hidden lg:block">
+              <Projects />
+            </div>
+            <div className="lg:hidden grid grid-cols-1 md:grid-cols-2 gap-6">
+              {projects.map((project, index) => (
+                <ProjectCard key={index} data={project} />
+              ))}
+            </div>
           </div>
-
-          <div className="bg-white dark:bg-gray-900 rounded-lg shadow-sm">
-            <Techstack />
-          </div>
-        </section>
-      </div>
-    </PagesMainLayout>
+        </MainLayout>
+      </PagesMainLayout>
+    </>
   );
 };
 
-export default Tech;
+export default Page;
