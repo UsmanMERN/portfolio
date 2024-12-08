@@ -1,5 +1,6 @@
 import React from 'react';
 import Section_1 from '@/components/Home/Section_1';
+import PagesMainLayout from '@/components/PageMainLayout';
 
 export default async function Home() {
   async function getContributions(): Promise<number> {

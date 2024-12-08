@@ -6,8 +6,7 @@ import { Download } from 'lucide-react';
 
 export default function Section_1({ contributions }: { contributions: number }) {
   return (
-    <div className="relative flex justify-center items-center flex-col md:flex-row hero-section px-6 lg:px-20 py-12"
-    >
+    <div className="max-h-[calc(100vh-160px)] relative flex justify-center items-center flex-col md:flex-row hero-section px-6 lg:px-20 py-12">
       {/* Left Content */}
       <div className="w-full md:w-1/2 text-center md:text-left space-y-6">
         <span className="bg-blue-600 text-white px-3 py-1 rounded-full text-sm sm:text-base shadow-lg tracking-widest uppercase">
@@ -44,7 +43,14 @@ export default function Section_1({ contributions }: { contributions: number }) 
 
         {/* CV Button */}
         <div className="flex justify-center md:justify-start">
-          <a href="https://drive.google.com/uc?export=download&id=1--tZhWLI3tDmfd_5EYc_dFFiyquQfaQQ" download="Muhammad_Usman.pdf" className="flex items-center gap-2bg-blue-600 text-whitepx-6 py-3 rounded-lgtext-base font-semiboldshadow-md hover:shadow-xlhover:bg-blue-700transition-all duration-300transform hover:scale-105">
+          <a href="https://drive.google.com/uc?export=download&id=1--tZhWLI3tDmfd_5EYc_dFFiyquQfaQQ" download="Muhammad_Usman.pdf" className=" gap-2
+          bg-blue-600 text-white
+          px-6 py-3 rounded-lg
+          text-base font-semibold
+          shadow-md hover:shadow-xl
+          hover:bg-blue-700
+          transition-all duration-300
+          transform hover:scale-105 flex items-center gap-2bg-blue-600 text-whitepx-6 rounded-lgtext-base font-semiboldshadow-md hover:shadow-xlhover:bg-blue-700transition-all">
             <Download size={20} />
             View My CV
           </a>
