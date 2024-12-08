@@ -85,7 +85,7 @@ export default function RootLayout({
             </header>
 
             {/* Main content area */}
-            <main className="flex-1 flex items-center justify-center px-6 sm:px-8 lg:px-16">
+            <main className="flex-1 flex items-center justify-center px-2 sm:px-4 lg:px-16">
               {children}
             </main>
             <span className="hidden lg:block">
