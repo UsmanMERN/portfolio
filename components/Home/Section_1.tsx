@@ -6,7 +6,7 @@ import { Download } from 'lucide-react';
 
 export default function Section_1({ contributions }: { contributions: number }) {
   return (
-    <div className="max-h-[calc(100vh-160px)] relative flex justify-center items-center flex-col md:flex-row hero-section px-6 lg:px-20 py-12">
+    <div className="max-h-[calc(100vh-250px)] relative flex justify-center items-center flex-col md:flex-row hero-section px-6 lg:px-20 py-12">
       {/* Left Content */}
       <div className="w-full md:w-1/2 text-center md:text-left space-y-6">
         <span className="bg-blue-600 text-white px-3 py-1 rounded-full text-sm sm:text-base shadow-lg tracking-widest uppercase">

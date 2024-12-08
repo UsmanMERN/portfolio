@@ -19,7 +19,7 @@ import { Textarea } from "./ui/textarea";
 import { useState } from "react";
 
 export default function ContactForm() {
-  const[isLoading,setIsLoading] = useState(false)
+  const [isLoading, setIsLoading] = useState(false)
 
   const formSchema = z.object({
     username: z.string().min(3, {
@@ -119,7 +119,7 @@ export default function ContactForm() {
             )}
           />
           <Button
-          disabled={isLoading}
+            disabled={isLoading}
             type="submit"
             variant={'outline'}
             className="bg-transparent rounded-none border-2 hover:bg-primary hover:text-white hover:border-primary"
