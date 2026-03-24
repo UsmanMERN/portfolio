@@ -83,7 +83,7 @@ export default function ContactForm() {
                 <FormControl>
                   <Input
                     placeholder="Full Name"
-                    className="bg-transparent border-0 border-b border-gray-200 dark:border-white/10 rounded-none h-14 px-0 text-lg focus-visible:ring-0 focus-visible:border-blue-500 transition-all placeholder:text-gray-400 dark:placeholder:text-gray-600 font-medium"
+                    className="bg-transparent border-0 border-b border-gray-200 dark:border-gray-800 rounded-none h-14 px-0 text-lg focus-visible:ring-0 focus-visible:border-blue-500 transition-all placeholder:text-gray-400 dark:placeholder:text-gray-600 font-medium"
                     {...field}
                   />
                 </FormControl>
@@ -99,7 +99,7 @@ export default function ContactForm() {
                 <FormControl>
                   <Input
                     placeholder="Email Address"
-                    className="bg-transparent border-0 border-b border-gray-200 dark:border-white/10 rounded-none h-14 px-0 text-lg focus-visible:ring-0 focus-visible:border-blue-500 transition-all placeholder:text-gray-400 dark:placeholder:text-gray-600 font-medium"
+                    className="bg-transparent border-0 border-b border-gray-200 dark:border-gray-800 rounded-none h-14 px-0 text-lg focus-visible:ring-0 focus-visible:border-blue-500 transition-all placeholder:text-gray-400 dark:placeholder:text-gray-600 font-medium"
                     {...field}
                   />
                 </FormControl>
@@ -115,7 +115,7 @@ export default function ContactForm() {
                 <FormControl>
                   <Textarea
                     placeholder="Tell me about your project or inquiry..."
-                    className="bg-transparent border-0 border-b border-gray-200 dark:border-white/10 rounded-none min-h-[120px] px-0 text-lg focus-visible:ring-0 focus-visible:border-blue-500 transition-all placeholder:text-gray-400 dark:placeholder:text-gray-600 font-medium resize-none overflow-hidden"
+                    className="bg-transparent border-0 border-b border-gray-200 dark:border-gray-800 rounded-none min-h-[120px] px-0 text-lg focus-visible:ring-0 focus-visible:border-blue-500 transition-all placeholder:text-gray-400 dark:placeholder:text-gray-600 font-medium resize-none overflow-hidden [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]"
                     {...field}
                   />
                 </FormControl>
