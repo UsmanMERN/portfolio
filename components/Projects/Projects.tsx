@@ -31,6 +31,12 @@ export default function Projects() {
             setModal={setModal}
             about={project.about}
             tech={project.tech}
+            problem={project.problem}
+            solution={project.solution}
+            features={project.features}
+            goals={project.goals}
+            focus={project.focus}
+            importance={project.importance}
           />
         </motion.div>
       ))}

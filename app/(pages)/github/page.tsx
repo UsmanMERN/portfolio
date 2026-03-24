@@ -1,7 +1,6 @@
-
 import React from 'react';
 import { Metadata } from 'next';
-import { FaGithub, FaCode, FaLink } from 'react-icons/fa';
+import { Github, Code, Star, ExternalLink, GitBranch } from 'lucide-react';
 import PagesMainLayout from '@/components/PageMainLayout';
 import PageTitle from '@/components/PageTitle';
 
@@ -12,13 +11,12 @@ interface Repo {
   html_url: string;
   language?: string;
   stargazers_count: number;
-  fork: number
+  fork: boolean;
 }
 
 export const metadata: Metadata = {
-  title: "My Coding Portfolio",
-  description: "Innovative web development portfolio showcasing full-stack projects and technical expertise.",
-  keywords: "Software Engineer, Web Developer, Full Stack Developer, React, Node.js, GitHub Projects"
+  title: "GitHub Portfolio | Muhammad Usman",
+  description: "Impactful open-source projects and technical expertise showcased through a curated GitHub repository collection.",
 };
 
 const GithubProjects = async () => {
@@ -28,15 +26,12 @@ const GithubProjects = async () => {
         next: { revalidate: 43200 },
       });
 
-      if (!response.ok) {
-        throw new Error('Failed to fetch GitHub repositories');
-      }
+      if (!response.ok) throw new Error('Failed to fetch GitHub repositories');
 
       const data: Repo[] = await response.json();
-      // Sort repos by star count and filter out forks
       return data
         .filter(repo => !repo.fork)
-        .sort((a, b) => b.stargazers_count - a.stargazers_count)
+        .sort((a, b) => b.stargazers_count - a.stargazers_count);
     } catch (error) {
       console.error('Error fetching GitHub repositories:', error);
       return [];
@@ -47,47 +42,63 @@ const GithubProjects = async () => {
 
   return (
     <PagesMainLayout>
+      <div className="container mx-auto px-4 max-w-6xl pb-20">
+        <PageTitle 
+          title="GitHub Projects"
+          subtitle="A curated collection of my most impactful and innovative coding architectures."
+        />
+        
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 pt-4">
+          {repos.map((repo, index) => (
+            <div
+              key={repo.id}
+              className="group p-8 rounded-3xl bg-gray-50 dark:bg-white/5 border border-gray-100 dark:border-white/10 hover:border-blue-500/30 transition-all duration-500 flex flex-col justify-between"
+            >
+              <div className="space-y-6">
+                <div className="flex justify-between items-start">
+                  <div className="p-3 bg-blue-600/10 dark:bg-blue-400/10 rounded-2xl group-hover:bg-blue-600 dark:group-hover:bg-blue-400 group-hover:text-white transition-all duration-500">
+                    <Code className="w-6 h-6" />
+                  </div>
+                  <a
+                    href={repo.html_url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-gray-400 hover:text-blue-600 transition-colors"
+                  >
+                    <ExternalLink className="w-5 h-5" />
+                  </a>
+                </div>
 
-      <PageTitle title="GitHub Projects"
-        subtitle="A curated collection of my most impactful and innovative coding projects."
-        icon={<FaGithub />} />
-      <div className="my-8 border-t border-gray-300 dark:border-gray-700"></div>
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-        {repos.map((repo, index) => (
-          <div
-            key={repo.id}
-            className="glass rounded-xl shadow-lg overflow-hidden transform transition-all hover:scale-105 hover:shadow-2xl"
-          >
-            <div className="p-6">
-              <div className="flex justify-between items-center mb-4">
-                <h3 className="text-xl font-semibold text-gray-800 dark:text-white flex items-center gap-2">
-                  <FaCode className="text-blue-500" />
-                  {repo.name}
-                </h3>
-                <a
-                  href={repo.html_url}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-blue-600 hover:text-blue-800 transition-colors"
-                >
-                  <FaLink />
-                </a>
+                <div className="space-y-3">
+                  <h3 className="text-2xl font-black text-gray-900 dark:text-white tracking-tight leading-tight">
+                    {repo.name}
+                  </h3>
+                  <p className="text-gray-600 dark:text-gray-400 font-medium leading-relaxed line-clamp-2 min-h-[3rem]">
+                    {repo.description || "Architectural excellence and high-performance engineering implementations."}
+                  </p>
+                </div>
               </div>
 
-              <p className="text-gray-600 dark:text-gray-300 mb-4 h-20 overflow-hidden">
-                {repo.description || "No description available"}
-              </p>
-
-              <div className="flex justify-between items-center text-sm text-gray-500">
-                <span>{repo.language || 'Unknown'}</span>
-                <div className="flex items-center gap-1">
-                  <span>⭐</span>
-                  {repo.stargazers_count}
+              <div className="pt-8 mt-8 border-t border-gray-200/50 dark:border-white/5 flex items-center justify-between">
+                <div className="flex items-center gap-4">
+                  {repo.language && (
+                    <div className="flex items-center gap-2">
+                       <div className="w-2 h-2 rounded-full bg-blue-500" />
+                       <span className="text-xs font-bold text-gray-500 dark:text-gray-400 uppercase tracking-widest">{repo.language}</span>
+                    </div>
+                  )}
+                </div>
+                
+                <div className="flex items-center gap-4 text-gray-500 dark:text-gray-400">
+                  <div className="flex items-center gap-1.5">
+                    <Star className="w-4 h-4" />
+                    <span className="text-xs font-bold">{repo.stargazers_count}</span>
+                  </div>
                 </div>
               </div>
             </div>
-          </div>
-        ))}
+          ))}
+        </div>
       </div>
     </PagesMainLayout>
   );

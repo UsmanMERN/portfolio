@@ -1,181 +1,167 @@
-import { Metadata } from "next";
-import Image from "next/image";
-import React from "react";
-import {
-  CodeIcon,
-  TargetIcon,
-  GlobeIcon,
-  AwardIcon,
-  RocketIcon,
-  User
-} from "lucide-react";
-import {
-  AiFillGithub,
-  AiFillLinkedin,
-  AiFillMail
-} from "react-icons/ai";
-import PagesMainLayout from "@/components/PageMainLayout";
-import PageTitle from "@/components/PageTitle";
+"use client"
+import React from 'react';
+import PagesMainLayout from '@/components/PageMainLayout';
+import { motion } from 'framer-motion';
+import { Award, Briefcase, GraduationCap, Target, Layers, Zap } from 'lucide-react';
 
-export const metadata: Metadata = {
-  title: "Muhammad Usman | Software Engineer & MERN Stack Developer",
-  description:
-    "Discover Muhammad Usman, a passionate software engineer and MERN stack developer. Learn about his expertise in React, Node.js, MongoDB, and other cutting-edge technologies. Find out how he transforms ideas into digital reality.",
-  keywords:
-    "Muhammad Usman, MERN Stack Developer, Software Engineer, Web Developer, Full Stack Developer, React Developer, Node.js Expert, MongoDB Developer, Digital Solutions, Software Development",
-  alternates: {
-    canonical: "/about",
-  },
-};
+const TimelineItem = ({ title, sub, date, desc }: { title: string, sub: string, date: string, desc: string[] }) => (
+  <div className="relative pl-8 border-l border-gray-100 dark:border-white/10 pb-12 last:pb-0">
+    <div className="absolute left-[-5px] top-2 w-[9px] h-[9px] rounded-full bg-blue-600 dark:bg-blue-400" />
+    <div className="space-y-2">
+      <div className="flex flex-col md:flex-row md:items-center justify-between gap-2">
+        <h3 className="text-xl font-black text-gray-900 dark:text-white uppercase tracking-tight">{title}</h3>
+        <span className="text-xs font-bold px-3 py-1 bg-gray-100 dark:bg-white/5 text-gray-500 dark:text-gray-400 rounded-full w-fit">
+          {date}
+        </span>
+      </div>
+      <p className="text-blue-600 dark:text-blue-400 font-bold uppercase tracking-[0.1em] text-[10px]">{sub}</p>
+      <ul className="space-y-2 pt-2">
+        {desc.map((d, i) => (
+          <li key={i} className="text-gray-600 dark:text-gray-400 font-medium leading-relaxed flex items-start gap-2">
+            <div className="w-1 h-1 rounded-full bg-blue-500 mt-2 shrink-0" />
+            {d}
+          </li>
+        ))}
+      </ul>
+    </div>
+  </div>
+)
 
-function About() {
+export default function AboutPage() {
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: { staggerChildren: 0.1, delayChildren: 0.2 }
+    }
+  };
+
+  const itemVariants = {
+    hidden: { y: 20, opacity: 0 },
+    visible: {
+      y: 0,
+      opacity: 1,
+      transition: { duration: 0.8, ease: [0.16, 1, 0.3, 1] }
+    }
+  };
+
   return (
     <PagesMainLayout>
-      <PageTitle
-        title="About Me"
-        subtitle="Transforming ideas into digital magic with code. Passionate about MERN stack development and crafting solutions for the modern world."
-        icon={<User />}
-      />
-
-      <div className="my-8 border-t border-gray-300 dark:border-gray-700"></div>
-
-      {/* Main Content */}
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex flex-col lg:flex-row justify-center items-start gap-12 lg:gap-20">
-          {/* Profile Card */}
-          <div className="w-full max-w-sm mx-auto lg:mx-0 lg:sticky lg:top-24">
-            <div className="glass flex flex-col items-center shadow-lg rounded-xl p-6 md:p-8 transform transition-transform hover:scale-105 hover:shadow-xl">
-              {/* Profile Image */}
-              <div className="relative w-32 h-32 md:w-48 md:h-48 mb-4 md:mb-6">
-                <Image
-                  src="/image.png"
-                  alt="Profile picture of Muhammad Usman"
-                  className="rounded-full object-cover border-4 border-gray-100 dark:border-gray-800 shadow-lg"
-                  fill
-                  priority
-                />
-                <div className="absolute bottom-0 right-0 bg-white dark:bg-gray-700 p-1.5 md:p-2 rounded-full shadow-md">
-                  <CodeIcon className="w-4 h-4 md:w-6 md:h-6 text-blue-500" />
-                </div>
-              </div>
-
-              <h2 className="text-xl md:text-2xl font-bold text-gray-900 dark:text-white">
-                Muhammad Usman
-              </h2>
-              <p className="text-xs md:text-sm text-gray-600 dark:text-gray-400 mb-4">
-                Software Engineer | MERN Stack Developer
-              </p>
-
-              {/* Social Links */}
-              <div className="flex space-x-4 md:space-x-6">
-                {[
-                  {
-                    Icon: AiFillGithub,
-                    href: "https://github.com/UsmanMERN",
-                    color: "text-gray-700 hover:text-gray-900 dark:text-gray-300 dark:hover:text-white",
-                  },
-                  {
-                    Icon: AiFillMail,
-                    href: "mailto:usman853136@gmail.com",
-                    color: "text-red-600 hover:text-red-800 dark:text-red-400 dark:hover:text-red-600",
-                  },
-                  {
-                    Icon: AiFillLinkedin,
-                    href: "https://www.linkedin.com/in/mernstack-developers/",
-                    color: "text-blue-600 hover:text-blue-800 dark:text-blue-400 dark:hover:text-blue-600",
-                  },
-                ].map(({ Icon, href, color }, index) => (
-                  <a
-                    key={index}
-                    href={href}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className={`text-xl md:text-2xl transition-transform transform hover:scale-110 ${color}`}
-                  >
-                    <Icon />
-                  </a>
-                ))}
-              </div>
-            </div>
+      <motion.div 
+        variants={containerVariants}
+        initial="hidden"
+        animate="visible"
+        className="max-w-5xl mx-auto py-12 px-4 space-y-24"
+      >
+        {/* Elite Header */}
+        <motion.div variants={itemVariants} className="space-y-4 text-center md:text-left">
+          <div className="flex items-center gap-3 justify-center md:justify-start">
+            <div className="h-[1px] w-8 bg-blue-600 dark:bg-blue-400"></div>
+            <span className="text-[10px] font-black tracking-[0.4em] uppercase text-blue-600 dark:text-blue-400">
+              Identity & Authority
+            </span>
           </div>
+          <h1 className="text-4xl md:text-7xl font-black tracking-tight text-gray-900 dark:text-white leading-tight">
+            Muhammad Usman. <br />
+            <span className="text-gray-400">Software Engineer & MERN Specialist.</span>
+          </h1>
+          <p className="text-xl md:text-2xl text-gray-600 dark:text-gray-400 font-medium leading-relaxed max-w-3xl pt-4">
+             I am a Full Stack Engineer specialized in building real-world, scalable, API-driven web and mobile applications with a relentless focus on SEO and performance.
+          </p>
+        </motion.div>
 
-          {/* About Section */}
-          <div className="flex-1 max-w-3xl space-y-6 md:space-y-8">
-            <h2 className="text-2xl md:text-3xl font-bold text-gray-900 dark:text-white">
-              Hi there! I&apos;m Muhammad Usman
-            </h2>
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-16">
+          {/* Experience Section */}
+          <motion.div variants={itemVariants} className="lg:col-span-12 space-y-12">
+            <div className="flex items-center gap-4">
+               <Briefcase className="w-6 h-6 text-blue-600 dark:text-blue-400" />
+               <h2 className="text-2xl font-black text-gray-900 dark:text-white uppercase tracking-widest text-xs">Professional Trajectory</h2>
+            </div>
+            
+            <div className="space-y-0">
+              <TimelineItem 
+                title="Full Stack Developer"
+                sub="Voltic Inc. — Teacher & Mentor"
+                date="Jan 2025 – Jun 2025"
+                desc={[
+                  "Delivering structured training programs for advanced web development.",
+                  "Guiding students through complex project-based learning architectures."
+                ]}
+              />
+              <TimelineItem 
+                title="MERN Stack Instructor"
+                sub="Saylani Welfare Trust"
+                date="Jan 2024 – Jan 2025"
+                desc={[
+                  "Trained 100+ students in real-world full-stack development concepts.",
+                  "Mentored beginners to intermediate developers in industry best practices."
+                ]}
+              />
+              <TimelineItem 
+                title="Full Stack Developer"
+                sub="Codevpk"
+                date="Jul 2023 – Jan 2025"
+                desc={[
+                  "Developed scalable full-stack web applications for global clients.",
+                  "Built high-performance APIs and refined complex frontend systems."
+                ]}
+              />
+            </div>
+          </motion.div>
 
-            <div className="space-y-4 md:space-y-6">
+          {/* Education Header */}
+          <motion.div variants={itemVariants} className="lg:col-span-12 space-y-8 pt-8 border-t border-gray-100 dark:border-white/10">
+            <div className="flex items-center gap-4">
+               <GraduationCap className="w-6 h-6 text-blue-600 dark:text-blue-400" />
+               <h2 className="text-2xl font-black text-gray-900 dark:text-white uppercase tracking-widest text-xs">Academic Foundation</h2>
+            </div>
+            <div className="bg-gray-50 dark:bg-white/5 p-8 rounded-[32px] border border-gray-100 dark:border-white/10">
+               <h3 className="text-2xl font-black text-gray-900 dark:text-white">Bachelor of Software Engineering</h3>
+               <p className="text-blue-600 dark:text-blue-400 font-bold uppercase tracking-[0.1em] text-xs pt-2">Government College University Faisalabad</p>
+               <p className="text-gray-500 dark:text-gray-400 font-bold text-xs pt-4">Duration: 2021 – 2025</p>
+            </div>
+          </motion.div>
+        </div>
+
+        {/* Expertise Grid */}
+        <motion.div variants={itemVariants} className="space-y-12">
+           <div className="flex items-center gap-4">
+               <Award className="w-6 h-6 text-blue-600 dark:text-blue-400" />
+               <h2 className="text-2xl font-black text-gray-900 dark:text-white uppercase tracking-widest text-xs">Core Strategic Expertise</h2>
+           </div>
+           
+           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
               {[
-                {
-                  icon: CodeIcon,
-                  text: "A passionate software engineer and dedicated MERN stack developer on a mission to transform ideas into reality.",
-                }, {
-                  icon: TargetIcon,
-                  text: "With obsessive attention to detail and an unwavering love for crafting digital solutions, I bring dreams to life through code.",
-                },
-                {
-                  icon: GlobeIcon,
-                  text: "I believe a great developer isn't just about writing code but understanding problems, architecting elegant solutions, and continuously learning.",
-                },
-                {
-                  icon: AwardIcon,
-                  text: "Awarded as 'Best Innovator of the Year' for my exceptional work in full-stack development and leading impactful projects.",
-                },
-                {
-                  icon: RocketIcon,
-                  text: "Building scalable, secure, and efficient applications is my forte. I'm always seeking new challenges to push the boundaries of technology.",
-                },
-                // ... other description items remain the same
-              ].map(({ icon: Icon, text }, index) => (
-                <div
-                  key={index}
-                  className="flex items-center gap-3 md:gap-4 bg-gray-100 dark:bg-gray-800 p-3 md:p-4 rounded-lg shadow-md transition-all duration-300 hover:shadow-lg"
-                >
-                  <div className="p-2 md:p-3 bg-blue-100 dark:bg-blue-900 rounded-full">
-                    <Icon className="w-5 h-5 md:w-6 md:h-6 text-blue-500 dark:text-blue-300" />
-                  </div>
-                  <p className="text-sm md:text-base text-gray-700 dark:text-gray-300">{text}</p>
+                { icon: Zap, title: 'Real-Time Systems', desc: 'Expertise in live sports apps, data streaming, and real-time notification architectures.' },
+                { icon: Layers, title: 'Full Stack Orchestration', desc: 'End-to-end application development with deep frontend and backend integration.' },
+                { icon: Target, title: 'SEO-Friendly Engineering', desc: 'Building products that index perfectly through technical SEO and performance focus.' }
+              ].map((exp, i) => (
+                <div key={i} className="p-8 bg-gray-50 dark:bg-white/5 rounded-3xl border border-gray-100 dark:border-white/10 hover:border-blue-500/30 transition-all group">
+                   <exp.icon className="w-8 h-8 text-blue-600 dark:text-blue-400 mb-6 group-hover:scale-110 transition-transform" />
+                   <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-4 tracking-tight">{exp.title}</h3>
+                   <p className="text-gray-600 dark:text-gray-400 leading-relaxed font-medium">{exp.desc}</p>
                 </div>
               ))}
-            </div>
+           </div>
+        </motion.div>
 
-            {/* Blockquote and Skills sections remain similar */}
-            <blockquote className="text-lg italic text-gray-600 dark:text-gray-400 border-l-4 pl-4 border-blue-500">
-              &quot;Let&apos;s connect and build something extraordinary together. Turning ideas into digital magic is my passion! ✨&quot;
-            </blockquote>
-
-            <h2 className="text-2xl font-bold text-gray-900 dark:text-white mt-12">
-              Skills and Expertise
-            </h2>
-            <ul className="list-disc list-inside text-gray-700 dark:text-gray-300">
-              <li>Proficient in React.js, Node.js, Express, and MongoDB (MERN Stack).</li>
-              <li>Experience with modern JavaScript (ES6+) and TypeScript.</li>
-              <li>Skilled in building RESTful APIs and integrating third-party services.</li>
-              <li>Strong knowledge of UI/UX principles and responsive design.</li>
-              <li>Familiar with Git, Docker, and CI/CD pipelines for efficient development workflows.</li>
-              <li>Basic understanding of machine learning and computer vision concepts.</li>
-            </ul>
-          </div>
-        </div>
-
-        <div className="my-8 border-t border-gray-300 dark:border-gray-700"></div>
-
-        {/* Call to Action */}
-        <div className="text-center py-8">
-          <p className="text-base md:text-lg text-gray-600 dark:text-gray-300">
-            Interested in collaborating or have a project idea? Let&apos;s make it happen!
-          </p>
-          <a
-            href="mailto:usman853136@gmail.com"
-            className="inline-block mt-4 px-4 py-2 md:px-6 md:py-3 bg-blue-600 text-white text-base md:text-lg font-medium rounded-lg shadow-md hover:bg-blue-700 hover:shadow-lg transition-transform transform hover:scale-105"
-          >
-            Get in Touch
-          </a>
-        </div>
-      </div>
+        {/* Achievements Section */}
+        <motion.div variants={itemVariants} className="pt-24 pb-12 text-center md:text-left">
+           <div className="flex flex-wrap gap-12 justify-center md:justify-start">
+              {[
+                { label: 'Trained Students', value: '100+' },
+                { label: 'Production Apps', value: '10+' },
+                { label: 'Years Experience', value: '3+' },
+                { label: 'Industries Served', value: '5+' }
+              ].map((stat, i) => (
+                <div key={i} className="space-y-1">
+                   <p className="text-5xl md:text-6xl font-black text-gray-900 dark:text-white tracking-tighter">{stat.value}</p>
+                   <p className="text-[10px] font-black tracking-[0.4em] uppercase text-blue-600 dark:text-blue-400">{stat.label}</p>
+                </div>
+              ))}
+           </div>
+        </motion.div>
+      </motion.div>
     </PagesMainLayout>
   );
 }
-
-export default About;

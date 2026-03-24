@@ -1,9 +1,11 @@
 'use client'
 import React, { useEffect, useState } from 'react'
-import Lottie from 'lottie-react';
+import dynamic from 'next/dynamic';
 import rightArrow from '../public/lotties/rightArrow.json';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
+
+const Lottie = dynamic(() => import('lottie-react'), { ssr: false });
 
 export default function RightArrow() {
   // const [path, setPath] = useState('')

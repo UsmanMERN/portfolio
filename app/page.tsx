@@ -20,8 +20,8 @@ export default async function Home() {
   const contributions = await getContributions();
 
   return (
-    <>
+    <PagesMainLayout hideScrollbar={true}>
       <Section_1 contributions={contributions} />
-    </>
+    </PagesMainLayout>
   );
 }

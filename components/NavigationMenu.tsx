@@ -43,12 +43,13 @@ export default function NavigationMenu() {
 
     document.addEventListener("keydown", handleShortcuts);
     return () => document.removeEventListener("keydown", handleShortcuts);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [open]);
 
   return (
     <>
       <kbd
-        className="fixed bottom-16 right-4 inline-flex h-5 items-center gap-1 rounded-lg bg-primary p-5 text-white cursor-pointer md:right-12"
+        className="fixed bottom-16 right-4 hidden md:inline-flex h-5 items-center gap-1 rounded-lg bg-primary p-5 text-white shadow-lg cursor-pointer md:right-12 z-50 hover:scale-105 transition-transform"
         onClick={() => setOpen(!open)}
       >
         <span className="text-lg">⌘+J</span>

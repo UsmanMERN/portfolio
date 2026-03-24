@@ -8,7 +8,14 @@ export interface Project {
   tech: string[];
   role: string;
   admin?: string | null;
-}[]
+  // Case Study Fields
+  problem?: string;
+  solution?: string;
+  features?: string[];
+  goals?: string[];
+  focus?: string;
+  importance?: string;
+}
 
 export interface ProjectModal {
   active: boolean;

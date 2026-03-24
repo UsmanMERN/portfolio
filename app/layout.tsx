@@ -12,16 +12,22 @@ import { Analytics } from '@vercel/analytics/react';
 
 export const metadata: Metadata = {
   metadataBase: new URL('https://usmandev.vercel.app'),
+  icons: {
+    icon: '/favicon.png',
+  },
   title: {
-    default: "Muhammad Usman | Software Engineer | Full Stack Developer",
+    default: "Full Stack MERN Developer | Real-Time Apps & SEO Websites | Muhammad Usman",
     template: "%s | Muhammad Usman | Software Engineer"
   },
-  description: "Expert Full Stack Developer creating innovative web solutions with cutting-edge MERN stack technologies. Transform your digital vision into reality.",
+  description: "Experienced Full Stack Developer specializing in MERN stack, mobile apps, real-time systems, and SEO-optimized websites. 3+ years of building high-performance digital products.",
   keywords: [
+    "MERN stack developer",
+    "Full stack developer Pakistan",
+    "React developer portfolio",
+    "Real-time app developer",
+    "SEO website developer",
+    "Mobile app developer",
     "Software Engineer",
-    "Full Stack Developer",
-    "MERN Stack",
-    "Web Development",
     "React",
     "Node.js",
     "Next.js",
@@ -46,8 +52,8 @@ export const metadata: Metadata = {
     type: 'website',
     locale: 'en_US',
     url: 'https://usmandev.vercel.app',
-    title: "Muhammad Usman | Software Engineer",
-    description: "Full Stack Developer crafting innovative web solutions",
+    title: "Full Stack MERN Developer | Muhammad Usman",
+    description: "Experienced Full Stack Developer specializing in MERN stack, mobile apps, real-time systems, and SEO websites.",
     siteName: "Muhammad Usman Portfolio",
     images: [
       {
@@ -59,8 +65,8 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: 'summary_large_image',
-    title: "Muhammad Usman | Software Engineer",
-    description: "Full Stack Developer | Innovative Web Solutions",
+    title: "Full Stack MERN Developer | Muhammad Usman",
+    description: "Experienced Full Stack Developer specializing in MERN stack, mobile apps, real-time systems, and SEO websites.",
     images: ['/twitter-image.jpg']
   }, verification: {
     google: 'gbkf_s8PmKqJTnD6BwRo2q4lwtWelCbVgqBfanbv3oc',

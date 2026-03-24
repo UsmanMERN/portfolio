@@ -11,7 +11,7 @@ export default function ProjectCard({ data }: { data: Project }) {
             <a href={url} target="_blank" rel="noopener noreferrer" className="block">
                 {/* Image Container */}
                 <div className="relative w-full aspect-video overflow-hidden">
-                    <Image src={`/${src}`} alt={title} fill className="object-cover transition-transform duration-300 group-hover:scale-105 brightness-90 group-hover:brightness-100 " />
+                    <Image src={src} alt={title} fill sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw" className="object-cover transition-transform duration-300 group-hover:scale-105 brightness-90 group-hover:brightness-100 " />
                 </div>
 
                 {/* Content Container */}
@@ -22,14 +22,24 @@ export default function ProjectCard({ data }: { data: Project }) {
                     </h2>
 
                     {/* Description */}
-                    <p className="text-gray-600 dark:text-gray-300 mb-4 line-clamp-2 text-sm md:text-base">
+                    <p className="text-gray-600 dark:text-gray-300 mb-4 text-sm md:text-base">
                         {about}
                     </p>
+
+                    {/* Case Study Snippets */}
+                    {(data.problem || data.solution || data.focus || data.importance) && (
+                        <div className="mb-4 space-y-2 text-sm text-gray-700 dark:text-gray-300 border-l-2 border-blue-500 pl-3">
+                            {data.problem && <p><strong>Problem:</strong> {data.problem}</p>}
+                            {data.solution && <p><strong>Solution:</strong> {data.solution}</p>}
+                            {data.focus && <p><strong>Focus:</strong> {data.focus}</p>}
+                            {data.importance && <p><strong>Importance:</strong> {data.importance}</p>}
+                        </div>
+                    )}
 
                     {/* Tech Stack */}
                     <div className="flex flex-wrap gap-2">
                         {tech.map((t, i) => (
-                            <span key={i} className=" px-2  py-1  text-xs  md:text-sm  rounded-md  text-white  font-medium  capitalize  transition-all  duration-300  group-hover:opacity-90" style={{ backgroundColor: color[i] || '#4299e1' }}>
+                            <span key={i} className=" px-2  py-1  text-xs  md:text-sm  rounded-md  text-white  font-medium  capitalize  transition-all  duration-300  group-hover:opacity-90 shadow-sm" style={{ backgroundColor: color[i] || '#4299e1' }}>
                                 {t}
                             </span>
                         ))}

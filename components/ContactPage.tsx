@@ -1,108 +1,96 @@
-'use client';
-
+"use client"
 import React from 'react';
 import ContactForm from '@/components/ContactForm';
-import Lottie from 'lottie-react';
-import * as animationData from '../public/lotties/smile.json';
-import { motion, type MotionProps } from 'framer-motion';
-
-// Define typed motion components
-type MotionDivProps = MotionProps & React.HTMLAttributes<HTMLDivElement>;
-const MotionDiv = motion.div as React.FC<MotionDivProps>;
+import { motion } from 'framer-motion';
+import { Mail, Phone, MapPin, MessageSquare, ArrowUpRight } from 'lucide-react';
+import PagesMainLayout from './PageMainLayout';
+import PageTitle from './PageTitle';
 
 export default function ContactPage() {
-    const containerVariants = {
-        initial: { opacity: 0 },
-        animate: { opacity: 1, transition: { duration: 0.5 } },
-        exit: { opacity: 0 },
+    const revealVariants = {
+        hidden: { y: 20, opacity: 0 },
+        visible: {
+            y: 0,
+            opacity: 1,
+            transition: { duration: 0.8, ease: [0.16, 1, 0.3, 1] }
+        }
     };
 
     return (
-        <>
-            {/* Desktop View */}
-            <div className="hidden md:block">
-                <MotionDiv
-                    className="flex flex-col md:flex-row justify-center items-center"
-                    variants={containerVariants}
-                    initial="initial"
-                    animate="animate"
-                    exit="exit"
-                >
-                    <div className="bg-primary h-80 md:h-96 w-full relative">
-                        {/* Quote Section */}
-                        <MotionDiv
-                            initial={{ opacity: 0 }}
-                            animate={{ opacity: 1 }}
-                            transition={{ duration: 0.5, ease: "easeOut" }}
-                            className="flex flex-col justify-center items-center md:h-full w-full absolute md:static -bottom-40 xsm:-bottom-32 z-20 bg-primary h-[110px] xsm:h-[60px] md:w-[40%] gap-8 text-white"
-                        >
-                            <q className="text-xl md:text-3xl font-medium text-center">
-                                I have a joke on programming, but it only works on my computer.
-                            </q>
-                            <div className="w-[60px] h-[60px] rounded-full hidden md:block">
-                                <Lottie
-                                    animationData={animationData}
-                                    loop={true}
-                                    autoPlay={true}
-                                    style={{ width: '50px', height: '70px' }}
-                                />
-                            </div>
-                        </MotionDiv>
+        <PagesMainLayout>
+            <div className="container mx-auto px-4 max-w-6xl py-12">
+                <PageTitle 
+                    title="Let's Build"
+                    subtitle="Turning complex high-level vision into scalable, high-performance digital products."
+                />
 
-                        {/* Contact Form Section */}
-                        <MotionDiv
-                            className="bg-black text-white dark:bg-white dark:text-black w-full md:w-[50%] absolute px-8 md:px-12 py-14 md:py-20 md:right-20 -top-12 shadow-xl"
-                            initial={{ x: 100, opacity: 0 }}
-                            animate={{ x: 0, opacity: 1, transition: { duration: 0.5, delay: 0.4 } }}
-                        >
-                            <h1 className="text-4xl font-bold mb-4">Contact.</h1>
-                            <ContactForm />
-                        </MotionDiv>
-                    </div>
-                </MotionDiv>
-            </div>
-
-            {/* Mobile View */}
-            <div className="block md:hidden container mx-auto px-4 sm:px-6 lg:px-8">
-                <MotionDiv
-                    className="flex flex-col md:flex-row justify-center items-center min-h-screen"
-                    variants={containerVariants}
-                    initial="initial"
-                    animate="animate"
-                    exit="exit"
-                >
-                    <div className="w-full max-w-4xl relative bg-primary overflow-hidden shadow-lg">
-                        {/* Quote Section */}
-                        <div className="bg-primary text-white text-center p-6 md:p-8">
-                            <q className="text-xl md:text-2xl font-medium">
-                                I have a joke on programming, but it only works on my computer.
-                            </q>
-                            <div className="w-[60px] h-[60px] rounded-full hidden md:block">
-                                <Lottie
-                                    animationData={animationData}
-                                    loop={true}
-                                    autoPlay={true}
-                                    style={{ width: '50px', height: '70px' }}
-                                />
-                            </div>
-                            <div className="w-16 h-16 mx-auto mt-4 md:block hidden">
-                                <Lottie
-                                    animationData={animationData}
-                                    loop={true}
-                                    autoPlay={true}
-                                    style={{ width: '50px', height: '70px' }}
-                                />
-                            </div>
+                <div className="grid grid-cols-1 lg:grid-cols-12 gap-16 pt-8">
+                    {/* Left: Consultative Sidebar */}
+                    <motion.div 
+                        variants={revealVariants}
+                        initial="hidden"
+                        animate="visible"
+                        className="lg:col-span-5 space-y-12"
+                    >
+                        <div className="space-y-8">
+                            <h2 className="text-3xl font-black text-gray-900 dark:text-white leading-tight">
+                                Consulting for high-growth <br />
+                                <span className="text-blue-600 dark:text-blue-400">software solutions.</span>
+                            </h2>
+                            <p className="text-lg text-gray-600 dark:text-gray-400 font-medium leading-relaxed">
+                                Whether you&apos;re an established enterprise or a scaling startup, I provide the engineering depth and architectural oversight needed to ship world-class products.
+                            </p>
                         </div>
 
-                        {/* Contact Form Section */}
-                        <div className="bg-black text-white dark:bg-white dark:text-black p-8 md:p-12">
-                            <h1 className="text-3xl md:text-4xl font-bold mb-6">Contact.</h1>
-                            <ContactForm />
+                        <div className="space-y-6">
+                            {[
+                                { icon: Mail, label: 'Email', value: 'usman853136@gmail.com', href: 'mailto:usman853136@gmail.com' },
+                                { icon: Phone, label: 'Phone', value: '+92 301 8531368', href: 'tel:+923018531368' },
+                                { icon: MapPin, label: 'Location', value: 'Islamabad, Pakistan', href: '#' }
+                            ].map((item, i) => (
+                                <a 
+                                    key={i} 
+                                    href={item.href}
+                                    className="flex items-center gap-6 group hover:translate-x-2 transition-transform duration-300"
+                                >
+                                    <div className="p-4 rounded-2xl bg-gray-50 dark:bg-white/5 border border-gray-100 dark:border-white/10 group-hover:border-blue-500/30 transition-all">
+                                        <item.icon className="w-6 h-6 text-blue-600 dark:text-blue-400" />
+                                    </div>
+                                    <div>
+                                        <p className="text-[10px] font-black tracking-[0.2em] uppercase text-gray-400">{item.label}</p>
+                                        <p className="text-lg font-bold text-gray-900 dark:text-white tracking-tight">{item.value}</p>
+                                    </div>
+                                </a>
+                            ))}
                         </div>
-                    </div>
-                </MotionDiv>
+                    </motion.div>
+
+                    {/* Right: Premium Intake Form */}
+                    <motion.div 
+                        variants={revealVariants}
+                        initial="hidden"
+                        animate="visible"
+                        transition={{ delay: 0.2 }}
+                        className="lg:col-span-7"
+                    >
+                        <div className="p-8 md:p-12 rounded-[40px] bg-gray-900 dark:bg-white border border-gray-900 dark:border-white shadow-2xl relative overflow-hidden group">
+                           {/* Subtle background glow for dark mode */}
+                           <div className="absolute -inset-10 bg-blue-600/10 rounded-full blur-3xl opacity-0 group-hover:opacity-100 transition-opacity"></div>
+                           
+                           <div className="relative z-10 space-y-8">
+                                <div className="flex items-center gap-4 text-white dark:text-gray-900">
+                                    <div className="p-3 bg-white/10 dark:bg-gray-900/10 rounded-xl">
+                                        <MessageSquare className="w-5 h-5" />
+                                    </div>
+                                    <h3 className="text-2xl font-black tracking-tight uppercase tracking-widest text-xs">Project Intake</h3>
+                                </div>
+                                
+                                <ContactForm />
+                           </div>
+                        </div>
+                    </motion.div>
+                </div>
             </div>
-        </>
+        </PagesMainLayout>
     );
 }

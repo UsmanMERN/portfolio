@@ -1,8 +1,9 @@
-'use client'
+"use client"
 import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { Loader2, Send } from 'lucide-react';
 
 import { Button } from "@/components/ui/button";
 import {
@@ -10,7 +11,6 @@ import {
   FormControl,
   FormField,
   FormItem,
-  FormLabel,
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
@@ -23,13 +23,14 @@ export default function ContactForm() {
 
   const formSchema = z.object({
     username: z.string().min(3, {
-      message: "Write your name correctly.",
+      message: "Please enter a valid name.",
     }),
-
     email: z.string().email().min(6, {
-      message: "Enter a valid email.",
+      message: "Please enter a valid email address.",
     }),
-    comment: z.string(),
+    comment: z.string().min(10, {
+      message: "Please provide a bit more detail about your inquiry.",
+    }),
   });
 
   const form = useForm<z.infer<typeof formSchema>>({
@@ -53,11 +54,15 @@ export default function ContactForm() {
       });
       if (response.ok) {
         setIsLoading(false)
-        toast.success("Form submitted successfully!")
-        form.reset({});
+        toast.success("Message sent! I'll get back to you shortly.")
+        form.reset({
+            username: "",
+            email: "",
+            comment: ""
+        });
       } else {
         setIsLoading(false)
-        toast.error("Form submission failed. Please try again later.")
+        toast.error("Submission failed. Please try again or email me directly.")
       }
     } catch (error) {
       setIsLoading(false)
@@ -67,9 +72,9 @@ export default function ContactForm() {
   }
 
   return (
-    <>
+    <div className="w-full">
       <Form {...form}>
-        <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
+        <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
           <FormField
             control={form.control}
             name="username"
@@ -77,8 +82,8 @@ export default function ContactForm() {
               <FormItem>
                 <FormControl>
                   <Input
-                    placeholder="Enter your Name"
-                    className="bg-black dark:bg-white outline-none border-0 border-b-4 border-b-primary rounded-none focus:outline-none focus:"
+                    placeholder="Full Name"
+                    className="bg-transparent border-0 border-b border-gray-200 dark:border-white/10 rounded-none h-14 px-0 text-lg focus-visible:ring-0 focus-visible:border-blue-500 transition-all placeholder:text-gray-400 dark:placeholder:text-gray-600 font-medium"
                     {...field}
                   />
                 </FormControl>
@@ -93,8 +98,8 @@ export default function ContactForm() {
               <FormItem>
                 <FormControl>
                   <Input
-                    placeholder="Enter your valid Email"
-                    className="bg-black dark:bg-white outline-none border-0 border-b-4 border-b-primary rounded-none focus:outline-none focus:border-0"
+                    placeholder="Email Address"
+                    className="bg-transparent border-0 border-b border-gray-200 dark:border-white/10 rounded-none h-14 px-0 text-lg focus-visible:ring-0 focus-visible:border-blue-500 transition-all placeholder:text-gray-400 dark:placeholder:text-gray-600 font-medium"
                     {...field}
                   />
                 </FormControl>
@@ -109,8 +114,8 @@ export default function ContactForm() {
               <FormItem>
                 <FormControl>
                   <Textarea
-                    placeholder="Your text here!"
-                    className="bg-black dark:bg-white outline-none border-0 border-b-4 border-b-primary rounded-none focus:outline-none focus:"
+                    placeholder="Tell me about your project or inquiry..."
+                    className="bg-transparent border-0 border-b border-gray-200 dark:border-white/10 rounded-none min-h-[120px] px-0 text-lg focus-visible:ring-0 focus-visible:border-blue-500 transition-all placeholder:text-gray-400 dark:placeholder:text-gray-600 font-medium resize-none overflow-hidden"
                     {...field}
                   />
                 </FormControl>
@@ -118,27 +123,34 @@ export default function ContactForm() {
               </FormItem>
             )}
           />
-          <Button
-            disabled={isLoading}
-            type="submit"
-            variant={'outline'}
-            className="bg-transparent rounded-none border-2 hover:bg-primary hover:text-white hover:border-primary"
-          >
-            Submit
-          </Button>
+
+          <div className="pt-8">
+            <Button
+              disabled={isLoading}
+              type="submit"
+              className="w-full h-16 bg-blue-600 hover:bg-blue-700 text-white dark:bg-blue-400 dark:text-gray-900 dark:hover:bg-blue-300 rounded-2xl text-lg font-black transition-all group flex items-center justify-center gap-3 disabled:opacity-50"
+            >
+              {isLoading ? (
+                <>
+                  <Loader2 className="w-5 h-5 animate-spin" />
+                  Sending...
+                </>
+              ) : (
+                <>
+                  Send Message
+                  <Send className="w-5 h-5 transition-transform group-hover:translate-x-1 group-hover:-translate-y-1" />
+                </>
+              )}
+            </Button>
+          </div>
         </form>
       </Form>
-      <ToastContainer position="top-right"
+      
+      <ToastContainer 
+        position="bottom-center"
         autoClose={5000}
-        hideProgressBar={false}
-        newestOnTop={false}
-        closeOnClick
-        rtl={false}
-        pauseOnFocusLoss
-        draggable
-        pauseOnHover
-        theme="light" />
-    </>
+        theme="dark" 
+      />
+    </div>
   );
 }
-
