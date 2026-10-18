@@ -53,7 +53,7 @@ export function Orbital({
   const handleReady = useCallback(() => setReady(true), []);
   const handleFailure = useCallback(() => setFailed(true), []);
   useEffect(() => {
-    const m = matchMedia("(min-width: 900px) and (pointer: fine)");
+    const m = matchMedia("(min-width: 801px) and (pointer: fine)");
     const change = () => setDesktop(m.matches);
     change();
     m.addEventListener("change", change);
@@ -97,12 +97,13 @@ export function Orbital({
   useEffect(() => {
     const element = root.current;
     const host = element?.closest<HTMLElement>(".cosmic-host") || element;
-    if (!host || !running || !desktop) {
+    if (!host || !running) {
       pointer.current = { x: 0, y: 0 };
       return;
     }
+    const fine = matchMedia("(pointer: fine)");
     const move = (event: PointerEvent) => {
-      if (event.pointerType === "touch") return;
+      if (!fine.matches || event.pointerType === "touch") return;
       const box = host.getBoundingClientRect();
       pointer.current = {
         x: Math.max(
@@ -127,7 +128,7 @@ export function Orbital({
       window.removeEventListener("blur", reset);
       reset();
     };
-  }, [running, desktop]);
+  }, [running]);
   return (
     <div
       ref={root}
