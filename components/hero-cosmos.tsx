@@ -42,6 +42,8 @@ export function HeroCosmos({
     if (!sky || !host || !running) {
       sky?.style.removeProperty("--sky-x");
       sky?.style.removeProperty("--sky-y");
+      sky?.style.removeProperty("--orbit-rx");
+      sky?.style.removeProperty("--orbit-ry");
       return;
     }
     const fine = matchMedia("(pointer: fine) and (min-width: 801px)");
@@ -56,6 +58,8 @@ export function HeroCosmos({
       y += (targetY - y) * 0.08;
       sky.style.setProperty("--sky-x", `${x.toFixed(2)}px`);
       sky.style.setProperty("--sky-y", `${y.toFixed(2)}px`);
+      sky.style.setProperty("--orbit-rx", `${(-y * 2.8).toFixed(2)}deg`);
+      sky.style.setProperty("--orbit-ry", `${(x * 2.8).toFixed(2)}deg`);
       if (Math.abs(targetX - x) + Math.abs(targetY - y) > 0.08)
         frame = requestAnimationFrame(paint);
     };
@@ -96,6 +100,8 @@ export function HeroCosmos({
       fine.removeEventListener("change", reset);
       sky.style.removeProperty("--sky-x");
       sky.style.removeProperty("--sky-y");
+      sky.style.removeProperty("--orbit-rx");
+      sky.style.removeProperty("--orbit-ry");
     };
   }, [running]);
 
@@ -222,11 +228,13 @@ export function HeroCosmos({
           </text>
         </svg>
         <div className={`cosmos-motif cosmos-motif-${art.motif}`}>
-          <i className="cosmos-ring ring-one sky-animation" />
-          <i className="cosmos-ring ring-two sky-animation" />
-          <i className="cosmos-ring ring-three sky-animation" />
-          <span className="cosmos-core" />
-          <b className="cosmos-satellite sky-animation" />
+          <div className="cosmos-orrery">
+            <i className="cosmos-ring ring-one sky-animation" />
+            <i className="cosmos-ring ring-two sky-animation" />
+            <i className="cosmos-ring ring-three sky-animation" />
+            <span className="cosmos-core" />
+            <b className="cosmos-satellite sky-animation" />
+          </div>
         </div>
         <div className="cosmos-meteors">
           {[0, 1, 2].map((i) => (

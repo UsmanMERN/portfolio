@@ -5200,6 +5200,13 @@ html[data-motion="reduced"] .portrait-link:hover .portrait-photo {
   top: 24%;
   opacity: 0.7;
   translate: calc(var(--sky-x) * 0.8) calc(var(--sky-y) * 0.8);
+  perspective: 900px;
+}
+.cosmos-orrery {
+  position: absolute;
+  inset: 0;
+  transform-style: preserve-3d;
+  transform: rotateX(var(--orbit-rx, 0deg)) rotateY(var(--orbit-ry, 0deg));
 }
 .cosmos-ring {
   display: block;
@@ -5208,24 +5215,29 @@ html[data-motion="reduced"] .portrait-link:hover .portrait-photo {
   border: 1px solid #d3e6bb35;
   border-radius: 50%;
 }
-.cosmos-motif-orbit .ring-one {
-  inset: 15% -20%;
-  transform: rotate(-25deg) scaleY(0.42);
+.cosmos-motif-orbit .ring-one,
+.cosmos-motif-constellation .ring-one {
+  inset: -8%;
+  transform: rotateZ(-25deg) rotateX(65deg) rotateY(-16deg);
   border-top-color: #e6f6ca8a;
   box-shadow: 0 -2px 8px #c5ff6710;
 }
-.cosmos-motif-orbit .ring-two {
+.cosmos-motif-orbit .ring-two,
+.cosmos-motif-constellation .ring-two {
   inset: 5%;
-  transform: rotate(24deg) scaleY(0.46);
+  transform: rotateZ(24deg) rotateX(-54deg) rotateY(30deg) translateZ(10px);
   border-style: dashed;
   border-color: #b8d1a647;
 }
-.cosmos-motif-orbit .ring-three {
-  inset: 30%;
+.cosmos-motif-orbit .ring-three,
+.cosmos-motif-constellation .ring-three {
+  inset: 17%;
+  transform: rotateX(24deg) rotateY(-38deg) translateZ(22px);
   border-color: #d9e9c784;
   box-shadow: 0 0 36px #c5ff6714;
 }
-.cosmos-motif-orbit .cosmos-core {
+.cosmos-motif-orbit .cosmos-core,
+.cosmos-motif-constellation .cosmos-core {
   position: absolute;
   inset: 31%;
   border-radius: 50%;
@@ -5249,7 +5261,7 @@ html[data-motion="reduced"] .portrait-link:hover .portrait-photo {
 }
 .cosmos-motif-eclipse .ring-two {
   inset: -18%;
-  transform: rotate(-38deg) scaleY(0.4);
+  transform: rotateZ(-38deg) rotateX(66deg) translateZ(12px);
   border-color: #c7d8b34a;
 }
 .cosmos-motif-eclipse .ring-three {
@@ -5273,7 +5285,9 @@ html[data-motion="reduced"] .portrait-link:hover .portrait-photo {
   box-shadow: 0 0 24px 5px #d7fba735;
 }
 .cosmos-motif-constellation {
-  display: none;
+  opacity: 0.45;
+  right: 3%;
+  top: 26%;
 }
 .cosmos-satellite {
   position: absolute;
@@ -5691,5 +5705,170 @@ html[data-motion="reduced"] .cosmos-meteors {
   .form-field textarea,
   .form-field select {
     font-size: 16px;
+  }
+}
+
+/* Shared spacing cadence: compact phones, comfortable tablets, bounded wide screens. */
+@media screen {
+  .section {
+    padding-block: clamp(64px, 8vw, 112px);
+  }
+  .page-intro {
+    padding-top: clamp(132px, 12vw, 172px);
+    padding-bottom: clamp(44px, 5.3vw, 76px);
+  }
+  .service-detail {
+    padding-block: clamp(48px, 5.3vw, 76px);
+    column-gap: clamp(24px, 3.5vw, 50px);
+  }
+  .service-detail > div > :last-child {
+    margin-bottom: 0;
+  }
+  .section-heading,
+  .skills-header {
+    gap: clamp(24px, 4vw, 56px);
+  }
+  .resume {
+    width: min(1040px, calc(100% - var(--gutter) * 2));
+    padding-block: clamp(132px, 12vw, 164px) clamp(64px, 7vw, 96px);
+  }
+  .resume-header {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    column-gap: clamp(24px, 4vw, 56px);
+    padding-bottom: clamp(32px, 4vw, 48px);
+  }
+  .resume-header h1 {
+    font-size: clamp(40px, 5vw, 62px);
+    text-wrap: balance;
+  }
+  .resume-header h2 {
+    font-size: clamp(19px, 2vw, 24px);
+    line-height: 1.4;
+    max-width: 480px;
+    margin-bottom: 16px;
+  }
+  .resume-availability {
+    color: var(--subtle);
+    font-size: 12px;
+    margin-bottom: 20px;
+  }
+  .resume-contact {
+    column-gap: 20px;
+    row-gap: 8px;
+  }
+  .resume-contact a {
+    min-height: 32px;
+    display: inline-flex;
+    align-items: center;
+  }
+  .resume-actions {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 12px;
+    padding-top: 28px;
+  }
+  .resume-download {
+    min-height: 48px;
+    padding: 12px 20px;
+    gap: 18px;
+    font-size: 12px;
+    white-space: nowrap;
+  }
+  .resume-view,
+  .resume-print {
+    min-height: 44px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    font-size: 12px;
+    margin: 0;
+  }
+  .resume-view:hover {
+    color: var(--accent);
+  }
+  .resume-section {
+    padding-block: clamp(28px, 3vw, 40px);
+    column-gap: clamp(24px, 3vw, 40px);
+  }
+  .resume-project h3 {
+    font-size: clamp(19px, 2vw, 23px);
+    line-height: 1.4;
+    text-wrap: pretty;
+  }
+  .resume-project .resume-project-type {
+    margin: 0 0 12px;
+  }
+  .resume-leadership {
+    margin: 0;
+    padding-left: 18px;
+    color: var(--muted);
+    font-size: 14px;
+  }
+  .resume-leadership li + li {
+    margin-top: 16px;
+  }
+}
+@media screen and (max-width: 800px) {
+  .resume-header {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 24px;
+  }
+  .resume-actions {
+    flex-flow: row wrap;
+    align-items: center;
+    padding-top: 0;
+    gap: 12px;
+  }
+  .resume-view {
+    order: 3;
+    padding-inline: 12px;
+  }
+  .resume-print {
+    padding-inline: 16px;
+  }
+}
+@media screen and (max-width: 550px) {
+  .page-intro {
+    padding-top: 128px;
+  }
+  .service-detail {
+    column-gap: 16px;
+  }
+  .resume-contact {
+    column-gap: 16px;
+  }
+  .resume-contact a {
+    min-height: 36px;
+  }
+  .resume-view {
+    padding-inline: 0;
+  }
+  .resume-section {
+    row-gap: 20px;
+  }
+  .resume-leadership {
+    font-size: 13px;
+  }
+}
+@media print {
+  .resume-actions,
+  .resume-availability {
+    display: none !important;
+  }
+  .resume-leadership {
+    font-size: 10pt;
+    color: #222;
+  }
+  .resume-project {
+    break-inside: avoid;
+  }
+  .resume-section {
+    break-inside: auto;
+  }
+  .resume-section > h2 {
+    break-after: avoid;
   }
 }

@@ -1,3 +1,5 @@
+import { resume } from "./resume";
+
 export const site = {
   name: "Muhammad Usman",
   title: "Software Engineer",
@@ -31,7 +33,7 @@ export const site = {
     dates: "2021–2025",
     institution: "Government College University Faisalabad",
   },
-  resumePdf: null as string | null,
+  resumePdf: resume.pdf,
   canonical:
     process.env.NEXT_PUBLIC_SITE_URL ||
     "https://muhammad-usman-orbital-studio.woodsylark256.chatgpt.site",
@@ -214,27 +216,27 @@ export const processSteps = [
 
 export const experience = [
   {
-    role: "Full Stack Developer",
-    company: "Voltic Inc. — Teacher & Mentor",
+    role: "MERN Stack Instructor",
+    company: "Voltic Inc.",
     dates: "Jan 2025 – Jun 2025",
     responsibility:
-      "Delivered structured training in advanced web development and guided students through project-based learning architectures.",
-    source: "https://devusman.vercel.app/about",
+      "Mentored 15+ developers through 10+ real-world projects, delivering structured full-stack training including deployment and optimization.",
+    source: resume.pdf,
   },
   {
     role: "MERN Stack Instructor",
-    company: "Saylani Welfare Trust",
+    company: "Saylani Mass IT Training Program",
     dates: "Jan 2024 – Jan 2025",
     responsibility:
-      "Taught full-stack development concepts and mentored beginner and intermediate developers in industry practices.",
-    source: "https://devusman.vercel.app/about",
+      "Trained 100+ students in the MERN stack through hands-on projects. Designed JavaScript, React, and backend curricula focused on industry practices.",
+    source: resume.pdf,
   },
   {
-    role: "Full Stack Developer",
+    role: "Full Stack Developer / WordPress Developer",
     company: "Codevpk",
     dates: "Jul 2023 – Jan 2025",
     responsibility:
-      "Developed full-stack web applications, APIs, and frontend systems for global clients.",
-    source: "https://devusman.vercel.app/about",
+      "Built custom WordPress themes and plugins, led React and React Native frontend development for 5+ client projects, and implemented Node.js APIs. Integrated Stripe, Firebase, and WordPress APIs, with SEO and performance work for international clients including Dubai.",
+    source: resume.pdf,
   },
 ];

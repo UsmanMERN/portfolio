@@ -1,6 +1,7 @@
 import Link from "next/link";
-import { site, skillGroups, experience } from "@/content/site";
-import { publishedProjects } from "@/content/projects";
+import { site, experience } from "@/content/site";
+import { resume } from "@/content/resume";
+import { Download, ArrowUpRight } from "lucide-react";
 import { PrintButton } from "@/components/print-button";
 import { HeroCosmos } from "@/components/hero-cosmos";
 import { pageMetadata } from "@/lib/metadata";
@@ -17,9 +18,11 @@ export default function ResumePage() {
         <div>
           <span className="mono">Resume / {site.country}</span>
           <h1 tabIndex={-1}>{site.name}</h1>
-          <h2>{site.title}</h2>
+          <h2>{resume.title}</h2>
+          <p className="resume-availability">{resume.availability}</p>
           <div className="resume-contact">
-            <a href={`mailto:${site.email}`}>{site.email}</a>
+            <a href={`mailto:${resume.email}`}>{resume.email}</a>
+            <a href={resume.phoneHref}>{resume.phone}</a>
             <a href={site.github} target="_blank" rel="noopener noreferrer">
               GitHub ↗
             </a>
@@ -29,32 +32,38 @@ export default function ResumePage() {
             <Link href="/contact">Contact</Link>
           </div>
         </div>
-        <div>
+        <div className="resume-actions">
+          <a
+            className="button button-primary resume-download"
+            href={site.resumePdf}
+            download
+          >
+            Download PDF <Download size={16} aria-hidden="true" />
+          </a>
+          <a
+            className="resume-view"
+            href={site.resumePdf}
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            View original CV <ArrowUpRight size={14} aria-hidden="true" />
+          </a>
           <PrintButton />
-          {site.resumePdf && (
-            <a className="text-link" href={site.resumePdf} download>
-              Download resume
-            </a>
-          )}
         </div>
       </header>
       <section className="resume-section">
         <h2>Profile</h2>
         <div>
-          <p>{site.intro}</p>
-          <p style={{ marginTop: 16 }}>
-            Focus: {site.positioning}. Priorities include readable structure,
-            responsive interfaces, reliable data handling, and clear handoff.
-          </p>
+          <p>{resume.summary}</p>
         </div>
       </section>
       <section className="resume-section">
         <h2>Capabilities</h2>
         <div className="resume-skills">
-          {skillGroups.map((g) => (
+          {resume.skills.map((g) => (
             <div key={g.name}>
               <h3>{g.name}</h3>
-              <p>{g.tools.join(" · ")}</p>
+              <p>{g.tools}</p>
             </div>
           ))}
         </div>
@@ -74,18 +83,28 @@ export default function ResumePage() {
         </div>
       </section>
       <section className="resume-section">
-        <h2>Project context</h2>
+        <h2>Projects</h2>
         <div>
-          {publishedProjects.map((p) => (
-            <article className="resume-project" key={p.slug}>
+          {resume.projects.map((p) => (
+            <article className="resume-project" key={p.name}>
               <h3>
-                <Link href={`/work/${p.slug}`}>{p.title} ↗</Link>
+                <a href={p.href} target="_blank" rel="noopener noreferrer">
+                  {p.name} ↗
+                </a>
               </h3>
-              <p>{p.shortDescription}</p>
-              <span className="mono">{p.stack.join(" / ")}</span>
+              <span className="mono resume-project-type">{p.type}</span>
+              <p>{p.description}</p>
             </article>
           ))}
         </div>
+      </section>
+      <section className="resume-section">
+        <h2>Leadership</h2>
+        <ul className="resume-leadership">
+          {resume.leadership.map((item) => (
+            <li key={item}>{item}</li>
+          ))}
+        </ul>
       </section>
       <section className="resume-section">
         <h2>Education</h2>

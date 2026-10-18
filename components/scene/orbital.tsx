@@ -94,23 +94,46 @@ export function Orbital({
     supported &&
     (desktop || optIn);
   const running = live && visible && tabVisible && !paused && !localPaused;
+  useEffect(() => {
+    const element = root.current;
+    const host = element?.closest<HTMLElement>(".cosmic-host") || element;
+    if (!host || !running || !desktop) {
+      pointer.current = { x: 0, y: 0 };
+      return;
+    }
+    const move = (event: PointerEvent) => {
+      if (event.pointerType === "touch") return;
+      const box = host.getBoundingClientRect();
+      pointer.current = {
+        x: Math.max(
+          -1,
+          Math.min(1, ((event.clientX - box.left) / box.width - 0.5) * 2),
+        ),
+        y: Math.max(
+          -1,
+          Math.min(1, ((event.clientY - box.top) / box.height - 0.5) * 2),
+        ),
+      };
+    };
+    const reset = () => {
+      pointer.current = { x: 0, y: 0 };
+    };
+    host.addEventListener("pointermove", move, { passive: true });
+    host.addEventListener("pointerleave", reset);
+    window.addEventListener("blur", reset);
+    return () => {
+      host.removeEventListener("pointermove", move);
+      host.removeEventListener("pointerleave", reset);
+      window.removeEventListener("blur", reset);
+      reset();
+    };
+  }, [running, desktop]);
   return (
     <div
       ref={root}
       data-running={running}
       data-live={live}
       className={`orbital ${live && ready ? "live-ready" : ""} ${lab ? "lab-orbital" : ""}`}
-      onPointerMove={(e) => {
-        if (reduced || e.pointerType === "touch") return;
-        const rect = e.currentTarget.getBoundingClientRect();
-        pointer.current = {
-          x: ((e.clientX - rect.left) / rect.width - 0.5) * 2,
-          y: ((e.clientY - rect.top) / rect.height - 0.5) * 2,
-        };
-      }}
-      onPointerLeave={() => {
-        pointer.current = { x: 0, y: 0 };
-      }}
     >
       <div className="orbit-grid" aria-hidden="true" />
       <div

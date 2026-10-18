@@ -18,6 +18,6 @@ Current public brands differ from two project names: BarkoPets currently present
 
 ## Still needed before publishing other work
 
-PumpV2 has petrol-management context only. Hausnine Homes, Pallet Supply Pros, Klickstock, Pivott, and Seeraht School are names without enough specific implementation facts. Add role, scope, technologies, approved imagery, and supported outcomes before publishing them. Do not invent client metrics, awards, uptime or growth claims.
+The owner-supplied CV (18 October 2026) provides implementation context for PumpV2, HipoGlobal, KlickStock, Pivott, and Seeraht; these are included in the HTML résumé, with the original CV links. Dedicated visual case studies still need approved imagery and detailed scope. Hausnine Homes and Pallet Supply Pros need further implementation facts. Do not invent client metrics, awards, uptime or growth claims.
 
-No resume PDF is supplied. The accessible HTML resume has a working print flow. Availability and personal phone/address are not guessed. The studio business email is the published contact channel. The AI category intentionally has an honest empty state until a supported project is added; the Lab examples are educational local interactions.
+The owner supplied `MuhammadUsman copy.pdf` on 18 October 2026 for publication in the portfolio. Its two pages were read and rendered; the PDF is copied unchanged to `public/resume/Muhammad-Usman-Resume.pdf`. The HTML résumé includes the supplied professional contact details and relocation preference. The studio business email remains the general site contact channel. The AI category intentionally has an honest empty state until a supported project is added; the Lab examples are educational local interactions.

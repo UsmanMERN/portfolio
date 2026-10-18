@@ -17,6 +17,7 @@ const types = {
   ".txt": "text/plain",
   ".xml": "application/xml",
   ".json": "application/json",
+  ".pdf": "application/pdf",
 };
 http
   .createServer(async (req, res) => {

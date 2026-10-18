@@ -99,27 +99,66 @@ function Sculpture({
   const middle = useRef<THREE.Group>(null);
   const phase = useRef(0);
   useFrame((_, delta) => {
+    if (!running) return;
     const d = Math.min(delta, 0.05);
+    const px = pointer.current.x;
+    const py = pointer.current.y;
     if (group.current) {
       group.current.rotation.x = THREE.MathUtils.damp(
         group.current.rotation.x,
-        0.3 + (pointer.current?.y || 0) * 0.12,
-        4,
+        0.3 + py * 0.48,
+        5,
         d,
       );
       group.current.rotation.y = THREE.MathUtils.damp(
         group.current.rotation.y,
-        -0.35 + (pointer.current?.x || 0) * 0.14,
+        -0.35 + px * 0.68,
+        5,
+        d,
+      );
+      group.current.rotation.z = THREE.MathUtils.damp(
+        group.current.rotation.z,
+        -0.35 + px * 0.09,
+        5,
+        d,
+      );
+      // A small physical camera-facing shift reinforces depth without moving the layout.
+      group.current.position.x = THREE.MathUtils.damp(
+        group.current.position.x,
+        px * 0.1,
+        5,
+        d,
+      );
+      group.current.position.y = THREE.MathUtils.damp(
+        group.current.position.y,
+        -py * 0.08,
+        5,
+        d,
+      );
+    }
+    phase.current += d * speed * 0.16;
+    if (inner.current) {
+      inner.current.rotation.z = 0.6 + phase.current;
+      inner.current.rotation.y = THREE.MathUtils.damp(
+        inner.current.rotation.y,
+        0.3 - px * 0.22,
+        4,
+        d,
+      );
+      inner.current.rotation.x = THREE.MathUtils.damp(
+        inner.current.rotation.x,
+        -0.85 - py * 0.18,
         4,
         d,
       );
     }
-    if (running) {
-      phase.current += d * speed * 0.16;
-      if (inner.current) inner.current.rotation.z = 0.6 + phase.current;
-      if (middle.current)
-        middle.current.rotation.y = 0.8 + Math.sin(phase.current) * 0.18;
-    }
+    if (middle.current)
+      middle.current.rotation.y = THREE.MathUtils.damp(
+        middle.current.rotation.y,
+        0.8 + Math.sin(phase.current) * 0.18 + px * 0.26,
+        4,
+        d,
+      );
   });
   const metal = (
     <meshPhysicalMaterial

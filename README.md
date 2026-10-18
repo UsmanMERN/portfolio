@@ -70,7 +70,7 @@ Every route's hero now has a cinematic galaxy backdrop with local variations: co
 
 ## Resume and assets
 
-The resume is accessible HTML with a print stylesheet and a working Print resume control. Set `site.resumePdf` only after adding a valid, approved PDF to `public/`. The professional studio portrait is used compactly at its real available resolution. Actual project screenshots and their provenance are centrally configured; illustrative diagrams are labeled separately.
+The resume is accessible HTML with a print stylesheet and a working Print resume control. The owner-supplied two-page CV is available to download or view at `/resume/Muhammad-Usman-Resume.pdf`; the HTML résumé follows its skills, experience, projects, leadership, and contact details. Edit résumé details in `content/resume.ts` and shared experience in `content/site.ts`. The professional studio portrait is used compactly at its real available resolution. Actual project screenshots and their provenance are centrally configured; illustrative diagrams are labeled separately.
 
 ## Deploy
 
@@ -82,8 +82,12 @@ npm run build:static
 
 Deploy the generated `out/` folder with directory-index routing and `404.html` handling. `public/_headers` provides security header declarations for compatible static hosts. The normal Next.js server also sends these headers. Set `NEXT_PUBLIC_SITE_URL` before building to override the editable production domain. Metadata, sitemap, robots, favicon, and an original social-share PNG are included. `app/social-card.png/route.ts` generates the share image with an extension-bearing route for static-host MIME compatibility; `lib/social-card.tsx` defines its ImageResponse design and reads the central profile.
 
-`.openai/hosting.json` retains the registered Sites project identity. Publishing uses the Sites source helper to commit/push the exact source, package the matching output, and deploy a saved version. The unrelated original GitHub remote is not overwritten. Do not store repository credentials in files.
+`.openai/hosting.json` retains the registered Sites project identity. Publishing uses the Sites source helper to commit/push the exact source, package the matching output, and deploy a saved version. The GitHub source is maintained at `UsmanMERN/portfolio`; Sites uses its own source checkout. Do not store repository credentials in files.
 
 The old application was removed as requested. A pre-rebuild backup was saved at `/private/tmp/portfolio-before-orbital-rebuild.tar.gz`; Git history was preserved.
 
 See `VERIFICATION.md` for the actual measured results and any limits.
+
+Hero cursor interaction rotates the actual Three.js sculpture around X, Y, and Z, with independent ring response and damped motion across the whole hero. Interior orbit layers use CSS perspective and preserved 3D transforms. Fine pointers drive these effects; touch, reduced motion, pause, hidden-tab, and simplified modes retain their existing controls. Shared section spacing is fluid and bounded, with specific résumé download, contact, and print layouts.
+
+Run `TEST_BASE_URL=http://127.0.0.1:3077 node scripts/verify-refinements.mjs` against the static preview for résumé PDF identity/MIME, print controls, responsive spacing, perspective cursor matrices, live 3D response, pause stability, and reduced-motion checks.
